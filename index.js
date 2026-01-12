@@ -35,3 +35,27 @@ document.querySelectorAll('a[href^="#"], button[data-scroll-to]').forEach(trigge
 
 // 3. Dynamic Year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// 4. Smart Header (Hide on scroll down, show on scroll up)
+let lastScrollTop = 0;
+const navBar = document.querySelector('.smart-nav');
+
+window.addEventListener("scroll", function() {
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  
+  // Optional: Only trigger after scrolling past a certain point (e.g., 50px)
+  if (scrollTop > 50) {
+    if (scrollTop > lastScrollTop) {
+      // Scrolling Down - Hide Nav
+      navBar.classList.add('nav-hidden');
+    } else {
+      // Scrolling Up - Show Nav
+      navBar.classList.remove('nav-hidden');
+    }
+  } else {
+    // At the very top, always show
+    navBar.classList.remove('nav-hidden');
+  }
+  
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+});
