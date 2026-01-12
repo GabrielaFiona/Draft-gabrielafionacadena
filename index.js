@@ -59,3 +59,98 @@ window.addEventListener("scroll", function() {
   
   lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
 });
+
+// 5. Carousel Logic
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextButton = document.querySelector('.btn-next');
+const prevButton = document.querySelector('.btn-prev');
+const dotsNav = document.querySelector('.carousel-nav');
+const dots = Array.from(dotsNav.children);
+
+const moveToSlide = (currentSlide, targetSlide, targetIndex) => {
+  // Move track
+  track.style.transform = 'translateX(-' + targetIndex * 100 + '%)';
+  // Update Current Slide Class
+  currentSlide.classList.remove('current-slide');
+  targetSlide.classList.add('current-slide');
+  // Update Dots
+  const currentDot = dotsNav.querySelector('.current-slide');
+  const targetDot = dots[targetIndex];
+  currentDot.classList.remove('current-slide');
+  targetDot.classList.add('current-slide');
+}
+
+// Button Events
+nextButton.addEventListener('click', e => {
+  const currentSlide = track.querySelector('.current-slide');
+  let nextSlide = currentSlide.nextElementSibling;
+  let nextIndex = slides.indexOf(nextSlide);
+  
+  // Loop back to start if at end
+  if (!nextSlide) {
+    nextSlide = slides[0];
+    nextIndex = 0;
+  }
+  
+  moveToSlide(currentSlide, nextSlide, nextIndex);
+});
+
+prevButton.addEventListener('click', e => {
+  const currentSlide = track.querySelector('.current-slide');
+  let prevSlide = currentSlide.previousElementSibling;
+  let prevIndex = slides.indexOf(prevSlide);
+
+  // Loop to end if at start
+  if (!prevSlide) {
+    prevSlide = slides[slides.length - 1];
+    prevIndex = slides.length - 1;
+  }
+
+  moveToSlide(currentSlide, prevSlide, prevIndex);
+});
+
+// Dot Events
+dotsNav.addEventListener('click', e => {
+  const targetDot = e.target.closest('button');
+  if (!targetDot) return;
+
+  const currentSlide = track.querySelector('.current-slide');
+  const targetIndex = dots.findIndex(dot => dot === targetDot);
+  const targetSlide = slides[targetIndex];
+
+  moveToSlide(currentSlide, targetSlide, targetIndex);
+});
+
+// Swipe Support (Touch Events)
+let touchStartX = 0;
+let touchEndX = 0;
+
+track.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+track.addEventListener('touchend', e => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const currentSlide = track.querySelector('.current-slide');
+  
+  if (touchStartX - touchEndX > 50) {
+    // Swiped Left (Next)
+    let nextSlide = currentSlide.nextElementSibling;
+    let nextIndex = slides.indexOf(nextSlide);
+    if (!nextSlide) { nextSlide = slides[0]; nextIndex = 0; }
+    moveToSlide(currentSlide, nextSlide, nextIndex);
+  }
+  
+  if (touchEndX - touchStartX > 50) {
+    // Swiped Right (Prev)
+    let prevSlide = currentSlide.previousElementSibling;
+    let prevIndex = slides.indexOf(prevSlide);
+    if (!prevSlide) { prevSlide = slides[slides.length - 1]; prevIndex = slides.length - 1; }
+    moveToSlide(currentSlide, prevSlide, prevIndex);
+  }
+}
