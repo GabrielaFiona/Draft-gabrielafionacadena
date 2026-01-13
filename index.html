@@ -31,7 +31,7 @@
       </p>
       
       <div class="hero-actions">
-        <a href="#services" class="btn-primary">View Services</a>
+        <a href="#services-intro" class="btn-primary">View Services</a>
       </div>
     </div>
   </header>
@@ -59,7 +59,31 @@
     </div>
   </section>
 
- 
+  <div class="section-divider reveal"></div>
+
+  <section id="services-intro" class="section services-intro reveal">
+    <div class="section-header">
+      <h2>Services</h2>
+    </div>
+    
+    <div class="grid-2">
+      <div class="service-intro-card">
+        <h3>Custom Built Websites</h3>
+        <p>Sites built from scratch that fit your business needs and are tailored to your brand.</p>
+        <div class="card-action">
+          <a href="#packages-list" class="btn-primary">View Packages</a>
+        </div>
+      </div>
+
+      <div class="service-intro-card">
+        <h3>Website Tailoring</h3>
+        <p>Already have a website? Let me help you upgrade or add new features!</p>
+        <div class="card-action">
+          <a href="#contact" class="btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="services" class="section services-top reveal">
     <div class="section-header">
@@ -83,7 +107,7 @@
     </div>
   </section>
 
-  <section class="section services-main reveal">
+  <section id="packages-list" class="section services-main reveal">
     <div class="section-header">
       <span class="eyebrow">The Structure</span>
       <h2>Website Packages</h2>
@@ -227,26 +251,29 @@
   </section>
 
   <section id="about" class="section about-section reveal">
-    <div class="grid-2">
-      <div class="about-visual">
+    <div class="about-container-centered">
+      
+      <div class="about-visual-centered">
         <div class="profile-img-container">
           <img src="https://raw.githubusercontent.com/GabrielaFiona/gabi-assets/eaca12e87cdb3a713c30fb172c4696f68b5a9985/classicshorthairhs.jpeg" alt="Gabriela Fiona" class="profile-img">
         </div>
       </div>
-      <div class="about-text">
+
+      <div class="about-text-centered">
         <span class="eyebrow">Behind the Screen</span>
         <h2>Meet the Architect</h2>
         <p>
           Hi, I'm Gabriela. I combine creative design with structural logic to build websites that don't just sit there—they work. With a background in marketing and technical problem solving, I act as a partner in your business, helping you organize your digital world so you can focus on what you do best.
         </p>
-        <div class="hero-actions" style="justify-content: flex-start; margin-top: 2rem;">
+        <div class="about-actions-centered">
           <a href="https://gabrielafiona.com/" target="_blank" class="btn-primary">View Full Portfolio</a>
         </div>
       </div>
+
     </div>
   </section>
 
-  <footer class="main-footer">
+  <footer class="main-footer" id="contact">
     <div class="footer-content">
       <div class="footer-brand">
         <h4>Gabriela Fiona</h4>
@@ -264,6 +291,6 @@
 
 </div>
 
-<script src="index.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
