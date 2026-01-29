@@ -20,7 +20,7 @@
 
   <nav class="nav-bar smart-nav">
     <div class="logo">Gabriela <span class="highlight">Digital.Architect</span></div>
-    <a href="#contact" class="btn-sm">Start a Project</a>
+    <a href="#contact-form" class="btn-sm">Start a Project</a>
   </nav>
 
   <header class="hero">
@@ -92,13 +92,9 @@
     </div>
     
     <div class="card-wide">
+      
       <div class="card-content">
-        
-        <div class="service-header-visual">
-          <img src="https://via.placeholder.com/600x300/e0e7ff/4c7dff?text=Brand+Kit+Background" alt="Brand Kit Visual">
-          <h3>Brand Kit Creation</h3>
-        </div>
-
+        <h3>Brand Kit Creation</h3>
         <p class="price">$400 <span class="note">(or discounted when bundled)</span></p>
         <p>The visual foundation of your business. We define your logo, fonts, and cohesive tone to ensure you resonate with your audience.</p>
         <ul class="check-list">
@@ -113,6 +109,12 @@
           <a href="#" class="pill-link">Logo Sheet</a>
           <a href="#" class="pill-link">Style Guide</a>
         </div>
+      </div>
+
+      <div class="card-image-side">
+        <img src="https://via.placeholder.com/600x300/e0e7ff/4c7dff?text=Brand+Kit+Visual" alt="Brand Kit Visual">
+      </div>
+
     </div>
   </section>
 
@@ -131,8 +133,9 @@
           <div class="tier-name">Basic Package</div>
         </div>
 
-        <div class="tier-price">$1,500</div>
         <div class="tier-desc">The "Online Business Card." Ideal for photographers or simple contact sites.</div>
+        <div class="tier-price">$1,500</div>
+        
         <hr>
         <ul class="feature-list">
           <li><strong>2 Pages</strong></li>
@@ -156,8 +159,9 @@
           <div class="tier-name">Standard Package</div>
         </div>
 
-        <div class="tier-price">$2,500</div>
         <div class="tier-desc">Business Growth. Perfect for restaurants, contractors, and local services.</div>
+        <div class="tier-price">$2,500</div>
+        
         <hr>
         <ul class="feature-list">
           <li><strong>5 Pages</strong></li>
@@ -179,8 +183,9 @@
           <div class="tier-name">Advanced Package</div>
         </div>
 
-        <div class="tier-price">$5,000</div>
         <div class="tier-desc">Full Integration. Designed for e-commerce, hotels, or complex logic.</div>
+        <div class="tier-price">$5,000</div>
+        
         <hr>
         <ul class="feature-list">
           <li><strong>10 Pages</strong></li>
@@ -328,6 +333,35 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <section id="contact-form" class="section contact-section reveal">
+    <div class="about-container-centered">
+      <span class="eyebrow">Let's Connect</span>
+      <h2>Start Your Project</h2>
+      <p>Ready to build something great? Fill out the form below and I'll get back to you shortly.</p>
+      
+      <div class="contact-form-container">
+        <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn-primary btn-submit">Send Message</button>
+        </form>
+      </div>
     </div>
   </section>
 
