@@ -678,3 +678,25 @@ p { font-size: 1.05rem; color: var(--text-muted); }
 .dropdown-form-container .form-group {
   margin-bottom: 0.8rem;
 }
+
+
+/* --- NEW: FLEXIBLE LAYOUT (Light Version of Philosophy Section) --- */
+.section.flexible-layout {
+  background-color: var(--bg-card); /* White background */
+  padding: 4rem;
+  border-radius: var(--radius-lg);
+  margin-left: -2rem; 
+  margin-right: -2rem;
+  width: calc(100% + 4rem);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+}
+
+@media(max-width: 800px) { 
+  .section.flexible-layout { 
+    margin-left: 0; 
+    margin-right: 0; 
+    width: 100%; 
+    padding: 3rem 1.5rem; 
+  }
+}
