@@ -68,10 +68,35 @@
       <div class="price-card">
         <div class="tier-name">Hourly Support</div>
         <div class="tier-price">$85<span style="font-size:1rem; color:#64748B;">/hr</span></div>
+        
+        <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500; margin-top: -0.5rem; margin-bottom: 1.5rem;">
+          *2-hour minimum for first-time clients
+        </p>
+
         <div class="tier-desc">Perfect for "I just need this fixed" moments. Updates, maintenance, and troubleshooting.</div>
         <hr>
         <div style="text-align:center;">
-          <a href="mailto:your-gabrielafiona@gmail.com?subject=Hourly%20Support%20Request" class="btn-secondary">Book an Hour</a>
+          <button class="btn-secondary toggle-form-btn" data-target="form-hourly" style="cursor:pointer; width:100%;">Book an Hour</button>
+        </div>
+
+        <div id="form-hourly" class="dropdown-form-container">
+          <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
+            <input type="hidden" name="_subject" value="New Hourly Support Request" />
+            
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label>What needs fixing?</label>
+              <textarea name="message" rows="3" placeholder="Briefly describe the issue..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-submit" style="margin-top:1rem;">Send Request</button>
+          </form>
         </div>
       </div>
 
@@ -82,7 +107,31 @@
         <div class="tier-desc">For half-finished sites or major overhauls. I assess the work remaining and give you a flat fee to launch.</div>
         <hr>
         <div style="text-align:center;">
-          <a href="mailto:your-gabrielafiona@gmail.com?subject=Project%20Estimate%20Request" class="btn-primary">Get an Estimate</a>
+          <button class="btn-primary toggle-form-btn" data-target="form-estimate" style="cursor:pointer; width:100%;">Get an Estimate</button>
+        </div>
+
+        <div id="form-estimate" class="dropdown-form-container">
+          <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
+            <input type="hidden" name="_subject" value="New Custom Project Estimate Request" />
+            
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label>Website URL (if applicable)</label>
+              <input type="text" name="website_url">
+            </div>
+            <div class="form-group">
+              <label>What remains to be done?</label>
+              <textarea name="message" rows="3" placeholder="Tell me about the unfinished project..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-submit" style="margin-top:1rem;">Request Estimate</button>
+          </form>
         </div>
       </div>
 
@@ -125,9 +174,38 @@
         
         <p style="font-size:0.8rem; margin-top:1rem; opacity:0.7;">*You only pay for your Domain Name (~$12/year).</p>
         
-        <div style="margin-top:2rem;">
-          <a href="mailto:your-gabrielafiona@gmail.com?subject=Google%20Site%20Inquiry" class="btn-primary">Inquire About Google Sites</a>
+        <div style="margin-top:2rem; width: 100%;">
+          <button class="btn-primary toggle-form-btn" data-target="form-google" style="cursor:pointer; width:100%;">Inquire About Google Sites</button>
         </div>
+
+        <div id="form-google" class="dropdown-form-container">
+          <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
+            <input type="hidden" name="_subject" value="New Google Site Inquiry" />
+            
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label>Budget Range</label>
+              <select name="budget" style="width:100%; padding:0.8rem; border:1px solid #e2e8f0; border-radius:12px; background:white;">
+                <option value="$600 - $700">$600 - $700</option>
+                <option value="$700 - $800">$700 - $800</option>
+                <option value="$800 - $900">$800 - $900</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-top:1rem;">
+              <label>Business Type</label>
+              <input type="text" name="business_type" placeholder="e.g. Landscaping, Bakery...">
+            </div>
+            <button type="submit" class="btn-primary btn-submit" style="margin-top:1rem;">Send Inquiry</button>
+          </form>
+        </div>
+
       </div>
     </div>
   </section>
