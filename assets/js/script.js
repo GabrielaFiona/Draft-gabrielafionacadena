@@ -22,47 +22,54 @@ revealElements.forEach((el) => revealObserver.observe(el));
 // 2. Smooth Scroll for Anchor Links
 document.querySelectorAll('a[href^="#"], button[data-scroll-to]').forEach(trigger => {
   trigger.addEventListener('click', function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href') || this.getAttribute('data-scroll-to');
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth'
-      });
+    const href = this.getAttribute('href');
+    // Only intercept if it's a valid ID selector
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
     }
   });
 });
 
 // 3. Dynamic Year
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearSpan = document.getElementById('year');
+if(yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+}
 
 // 4. Smart Header (Hide on scroll down, show on scroll up)
 let lastScrollTop = 0;
 const navBar = document.querySelector('.smart-nav');
 
-window.addEventListener("scroll", function() {
-  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  
-  // Optional: Only trigger after scrolling past a certain point (e.g., 50px)
-  if (scrollTop > 50) {
-    if (scrollTop > lastScrollTop) {
-      // Scrolling Down - Hide Nav
-      navBar.classList.add('nav-hidden');
+if (navBar) {
+  window.addEventListener("scroll", function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 50) {
+      if (scrollTop > lastScrollTop) {
+        // Scrolling Down - Hide Nav
+        navBar.classList.add('nav-hidden');
+      } else {
+        // Scrolling Up - Show Nav
+        navBar.classList.remove('nav-hidden');
+      }
     } else {
-      // Scrolling Up - Show Nav
       navBar.classList.remove('nav-hidden');
     }
-  } else {
-    // At the very top, always show
-    navBar.classList.remove('nav-hidden');
-  }
-  
-  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
-});
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+  });
+}
 
 // 5. Carousel Logic
 const track = document.querySelector('.carousel-track');
-if (track) { // Check if track exists to avoid errors on pages without carousel
+if (track) { 
   const slides = Array.from(track.children);
   const nextButton = document.querySelector('.btn-next');
   const prevButton = document.querySelector('.btn-prev');
@@ -70,26 +77,21 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
   const dots = Array.from(dotsNav.children);
 
   const moveToSlide = (currentSlide, targetSlide, targetIndex) => {
-    // Move track
     track.style.transform = 'translateX(-' + targetIndex * 100 + '%)';
-    // Update Current Slide Class
     currentSlide.classList.remove('current-slide');
     targetSlide.classList.add('current-slide');
-    // Update Dots
     const currentDot = dotsNav.querySelector('.current-slide');
     const targetDot = dots[targetIndex];
     currentDot.classList.remove('current-slide');
     targetDot.classList.add('current-slide');
   }
 
-  // Button Events
   if (nextButton) {
     nextButton.addEventListener('click', e => {
       const currentSlide = track.querySelector('.current-slide');
       let nextSlide = currentSlide.nextElementSibling;
       let nextIndex = slides.indexOf(nextSlide);
       
-      // Loop back to start if at end
       if (!nextSlide) {
         nextSlide = slides[0];
         nextIndex = 0;
@@ -105,7 +107,6 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
       let prevSlide = currentSlide.previousElementSibling;
       let prevIndex = slides.indexOf(prevSlide);
 
-      // Loop to end if at start
       if (!prevSlide) {
         prevSlide = slides[slides.length - 1];
         prevIndex = slides.length - 1;
@@ -115,7 +116,6 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
     });
   }
 
-  // Dot Events
   if (dotsNav) {
     dotsNav.addEventListener('click', e => {
       const targetDot = e.target.closest('button');
@@ -129,7 +129,7 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
     });
   }
 
-  // Swipe Support (Touch Events)
+  // Swipe Support
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -146,7 +146,6 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
     const currentSlide = track.querySelector('.current-slide');
     
     if (touchStartX - touchEndX > 50) {
-      // Swiped Left (Next)
       let nextSlide = currentSlide.nextElementSibling;
       let nextIndex = slides.indexOf(nextSlide);
       if (!nextSlide) { nextSlide = slides[0]; nextIndex = 0; }
@@ -154,7 +153,6 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
     }
     
     if (touchEndX - touchStartX > 50) {
-      // Swiped Right (Prev)
       let prevSlide = currentSlide.previousElementSibling;
       let prevIndex = slides.indexOf(prevSlide);
       if (!prevSlide) { prevSlide = slides[slides.length - 1]; prevIndex = slides.length - 1; }
@@ -162,3 +160,28 @@ if (track) { // Check if track exists to avoid errors on pages without carousel
     }
   }
 }
+
+// 6. TOGGLE FORMS LOGIC (NEW)
+const toggleButtons = document.querySelectorAll('.toggle-form-btn');
+
+toggleButtons.forEach(btn => {
+  btn.addEventListener('click', function() {
+    const targetId = this.getAttribute('data-target');
+    const targetForm = document.getElementById(targetId);
+    
+    if (targetForm) {
+      // Toggle the active class on the target form
+      const isActive = targetForm.classList.contains('active');
+      
+      // Optional: Close other forms first (Accordion behavior)
+      document.querySelectorAll('.dropdown-form-container').forEach(form => {
+        form.classList.remove('active');
+      });
+
+      // If it wasn't active before, open it now
+      if (!isActive) {
+        targetForm.classList.add('active');
+      }
+    }
+  });
+});
