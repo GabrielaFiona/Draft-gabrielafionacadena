@@ -741,3 +741,21 @@ p { font-size: 1.05rem; color: var(--text-muted); }
   text-align: center;
   max-width: 450px; /* Optional: keeps the text readable and compact */
 }
+
+/* --- PERFORMANCE UPDATES FOR PACKAGE IMAGES --- */
+
+.price-card {
+  /* Tells the browser to optimize rendering for this element */
+  will-change: transform; 
+  /* Skips rendering the card until it is about to come on screen */
+  content-visibility: auto; 
+  contain-intrinsic-size: 1px 500px; /* Provides a placeholder size to prevent scroll jumping */
+}
+
+.service-header-visual img {
+  /* Ensures the image doesn't cause layout shifts while loading */
+  display: block;
+  /* Prevents the browser from spending resources rendering pixels that aren't visible */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
