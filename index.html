@@ -20,7 +20,7 @@
 
   <nav class="nav-bar smart-nav">
     <div class="logo">Gabriela <span class="highlight">Digital.Architect</span></div>
-    <a href="#contact" class="btn-sm">Start a Project</a>
+    <a href="#contact-trigger" class="btn-sm">Start a Project</a>
   </nav>
 
   <header class="hero">
@@ -36,6 +36,43 @@
     </div>
   </header>
 
+  <section id="contact-trigger" class="section about-section reveal">
+    <div class="about-text-content">
+      <h2>Meet the Architect</h2>
+      <span class="eyebrow">Behind the Screen</span>
+      <div class="profile-img-container">
+        <img src="https://raw.githubusercontent.com/GabrielaFiona/gabi-assets/eaca12e87cdb3a713c30fb172c4696f68b5a9985/classicshorthairhs.jpeg" alt="Gabriela Fiona" class="profile-img">
+      </div>
+      <span class="eyebrow">Gabriela Fiona Cadena</span>
+      <h3>Hi, thanks for visiting!</h3>
+      <p>
+        I'm Gabriela. I combine creative design with structural logic to build websites that don't just sit there—they work. With a background in marketing and technical problem solving, I act as a partner in your business.
+      </p>
+      <div class="about-actions" style="display: flex; gap: 1rem; flex-direction: column; align-items: center;">
+        <a href="https://gabrielafiona.com/" target="_blank" class="btn-primary">View Full Portfolio</a>
+        <button class="btn-secondary toggle-form-btn" data-target="form-main-contact">Contact Me</button>
+      </div>
+
+      <div id="form-main-contact" class="dropdown-form-container" style="max-width: 600px; margin: 2rem auto 0 auto;">
+        <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Who should I contact?" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="What's your email?" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your business goals..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <section class="section philosophy reveal">
     <div class="grid-2">
       <div class="text-block">
@@ -48,10 +85,8 @@
         </p>
       </div>
       <div class="stat-card"><h3>Personalized Onboarding Experience</h3>
-        <p>Some web designers send you a form and disappear. I want you to be confident in every step of the process, so I built a custom <strong>Onboarding Dashboard</strong> . This will help guide us through meeting all your website needs and organizing all the assets and integrations as needed. By the end of our call, you'll have a clearly written vision of the site I'm hand-building for you. Take a look at my example demo & play around with layouts!
+        <p>Some web designers send you a form and disappear. I want you to be confident in every step of the process, so I built a custom <strong>Onboarding Dashboard</strong> .
       </p>
-
-
       <div class="center-cta">
         <a href="https://gabrielafiona.github.io/GFC-WebOnboarding-draft/demov4" target="_blank" class="btn-secondary">Preview the Onboarding Hub</a>
       </div>
@@ -125,12 +160,7 @@
 
     <div class="pricing-grid">
       
-      <div class="price-card">
-        <div class="service-header-visual">
-          <img src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/855d2e6d5f02e5b6d3a9add1d3d1636da76f0500/assets/img/blueorangebwpaperswshadowsbkgd.jpg" 
-               alt="Basic Site Visual" 
-               loading="lazy"> </div>
-
+      <div class="price-card pkg-1">
         <div class="package-text-wrapper">
           <div class="tier-name">Basic Package</div>
           <div class="tier-desc">Ideal for simple contact page, portfolio, or single service.</div>
@@ -149,13 +179,8 @@
         </div>
       </div>
 
-      <div class="price-card featured">
+      <div class="price-card featured pkg-2">
         <div class="badge">Most Popular</div>
-        <div class="service-header-visual">
-          <img src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/855d2e6d5f02e5b6d3a9add1d3d1636da76f0500/assets/img/openinglaptopindark.jpg" 
-               alt="Standard Site Visual" 
-               loading="lazy"> </div>
-
         <div class="package-text-wrapper">
           <div class="tier-name">Standard Package</div>
           <div class="tier-desc">Perfect for restaurants, contractors, and local services.</div>
@@ -174,12 +199,7 @@
         </div>
       </div>
 
-      <div class="price-card">
-        <div class="service-header-visual">
-          <img src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/855d2e6d5f02e5b6d3a9add1d3d1636da76f0500/assets/img/codecloseup.jpg" 
-               alt="Advanced Site Visual" 
-               loading="lazy"> </div>
-
+      <div class="price-card pkg-3">
         <div class="package-text-wrapper">
           <div class="tier-name">Advanced Package</div>
           <div class="tier-desc">Fully integrated with your existing platform.</div>
@@ -215,14 +235,10 @@
     <div class="process-inner">
       <span class="eyebrow">The Results</span>
       <h2>View My Work</h2>
-      <p>I build custom digital spaces for your services or products. Here is a preview of recent projects, ranging from fully custom built product stores to integrated Google Sites.</p>
-      
       <div class="carousel">
         <button class="carousel-btn btn-prev">&#10094;</button>
-        
         <div class="carousel-track-container">
           <ul class="carousel-track">
-            
             <li class="carousel-slide current-slide">
               <div class="mockup-window">
                 <div class="mockup-header">
@@ -231,128 +247,32 @@
                 </div>
                 <div class="mockup-body no-padding">
                   <a href="https://www.mcknighttoddbookkeeping.com/" target="_blank">
-                    <img 
-                      src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/88370dead66628be6bfdee9c65475fcd4d8eb38f/assets/img/kotascreenshot.png" 
-                      alt="McKnight Todd Bookkeeping Website" 
-                      class="site-preview-img"
-                    >
+                    <img src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/88370dead66628be6bfdee9c65475fcd4d8eb38f/assets/img/kotascreenshot.png" alt="McKnight Todd" class="site-preview-img">
                   </a>
                 </div>
               </div>
             </li>
-
             <li class="carousel-slide">
-              <div class="mockup-window">
-                <div class="mockup-header">
-                  <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                  <span class="url-bar">nathanshomerepairsolution.com</span>
+                <div class="mockup-window">
+                  <div class="mockup-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="url-bar">nathanshomerepairsolution.com</span>
+                  </div>
+                  <div class="mockup-body no-padding">
+                     <a href="https://www.nathanshomerepairsolution.com/" target="_blank">
+                       <img src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/88370dead66628be6bfdee9c65475fcd4d8eb38f/assets/img/NATHANSHOMEREPAIRSOLUTIONSscreenshotforportfolio.png" alt="Nathan's Home Repair" class="site-preview-img">
+                     </a>
+                  </div>
                 </div>
-                <div class="mockup-body no-padding">
-                   <a href="https://www.nathanshomerepairsolution.com/" target="_blank">
-                     <img 
-                      src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/88370dead66628be6bfdee9c65475fcd4d8eb38f/assets/img/NATHANSHOMEREPAIRSOLUTIONSscreenshotforportfolio.png" 
-                      alt="Nathan's Home Repair Website" 
-                      class="site-preview-img"
-                     >
-                   </a>
-                </div>
-              </div>
-            </li>
-
-            <li class="carousel-slide">
-              <div class="mockup-window">
-                <div class="mockup-header">
-                  <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                  <span class="url-bar">thebougiebeachparty.com</span>
-                </div>
-                <div class="mockup-body no-padding">
-                   <a href="https://thebougiebeachparty.com" target="_blank">
-                     <img 
-                      src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/88370dead66628be6bfdee9c65475fcd4d8eb38f/assets/img/thebougiebeachpartycoscreenshot.png" 
-                      alt="Bougie Beach Party Co. Website" 
-                      class="site-preview-img"
-                     >
-                   </a>
-                </div>
-              </div>
-            </li>
-
-            <li class="carousel-slide">
-              <div class="mockup-window">
-                <div class="mockup-header">
-                  <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                  <span class="url-bar">sites.google.com/view/newport-cleaning</span>
-                </div>
-                <div class="mockup-body no-padding">
-                   <a href="https://sites.google.com/view/newport-cleaning/home" target="_blank">
-                     <img 
-                      src="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/88370dead66628be6bfdee9c65475fcd4d8eb38f/assets/img/newportcleaningscreenshot.png" 
-                      alt="Newport Cleaning Website" 
-                      class="site-preview-img"
-                     >
-                   </a>
-                </div>
-              </div>
-            </li>
-            
+              </li>
           </ul>
         </div>
-
         <button class="carousel-btn btn-next">&#10095;</button>
-
         <div class="carousel-nav">
           <button class="carousel-indicator current-slide"></button>
           <button class="carousel-indicator"></button>
-          <button class="carousel-indicator"></button>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <section id="contact" class="section about-section reveal">
-    <div class="grid-2 align-top">
-      
-      <div class="about-text-content">
-        <h2>Meet the Architect</h2>
-        <span class="eyebrow">Behind the Screen</span>
-        <div class="profile-img-container">
-          <img src="https://raw.githubusercontent.com/GabrielaFiona/gabi-assets/eaca12e87cdb3a713c30fb172c4696f68b5a9985/classicshorthairhs.jpeg" alt="Gabriela Fiona" class="profile-img">
-        </div>
-        <span class="eyebrow">Gabriela Fiona Cadena</span>
-        <h3>Hi, thanks for visiting!</h3>
-        <p>
-          I'm Gabriela. I combine creative design with structural logic to build websites that don't just sit there—they work. With a background in marketing and technical problem solving, I act as a partner in your business, helping you organize your digital world so you can focus on what you do best.
-        </p>
-        <div class="about-actions">
-          <a href="https://gabrielafiona.com/" target="_blank" class="btn-primary">View Full Portfolio</a>
-        </div>
-      </div>
-
-      <div class="contact-form-container">
-        <h3>Start a Project</h3>
-        <p>Ready to build something great? Fill out the form below and I'll get back to you shortly.</p>
-        
-        <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Who should I contact?" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="What's the best email to reach you?" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell me about your business goals..." required></textarea>
-          </div>
-          
-          <button type="submit" class="btn-primary btn-submit">Send Message</button>
-        </form>
-      </div>
-
     </div>
   </section>
 
