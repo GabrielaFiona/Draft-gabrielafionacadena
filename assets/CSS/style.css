@@ -714,3 +714,30 @@ p { font-size: 1.05rem; color: var(--text-muted); }
     padding: 3rem 1.5rem; 
   }
 }
+
+/* --- UPDATE: CENTER ARCHITECT COLUMN CONTENT --- */
+
+/* Centers the profile image and its container */
+.profile-img-container {
+  margin: 0 auto 2rem auto !important; /* Forces centering in the grid column */
+}
+
+/* Centers the text and labels within the about section column */
+.about-text-content {
+  text-align: center; /* Centers the headings and eyebrow text */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures the button and image stay centered */
+}
+
+/* Ensures the eyebrow span is centered as well */
+.about-text-content .eyebrow {
+  width: 100%;
+  text-align: center;
+}
+
+/* Centers the description paragraph for better balance */
+.about-text-content p {
+  text-align: center;
+  max-width: 450px; /* Optional: keeps the text readable and compact */
+}
