@@ -36,40 +36,54 @@
     </div>
   </header>
 
-  <section id="contact" class="section about-section reveal">
-    <div class="about-text-content">
+ <section id="contact" class="section about-section reveal">
+    <div class="section-header">
       <h2>Meet the Architect</h2>
-      <span class="eyebrow">Behind the Screen</span>
-      <div class="profile-img-container">
-        <img src="https://raw.githubusercontent.com/GabrielaFiona/gabi-assets/eaca12e87cdb3a713c30fb172c4696f68b5a9985/classicshorthairhs.jpeg" alt="Gabriela Fiona" class="profile-img">
-      </div>
-      <span class="eyebrow">Gabriela Fiona Cadena</span>
-      <h3>Hi, thanks for visiting!</h3>
-      <p>
-        I'm Gabriela. I combine creative design with structural logic to build websites that don't just sit there—they work. With a background in marketing and technical problem solving, I act as a partner in your business.
-      </p>
-      <div class="about-actions">
-        <a href="https://gabrielafiona.com/" target="_blank" class="btn-primary">View Full Portfolio</a>
-        <button class="btn-secondary toggle-form-btn" data-target="form-main-contact">Contact Me</button>
+    </div>
+
+    <div class="grid-2 align-top">
+      <div class="about-column-left">
+        <div class="profile-img-container">
+          <img src="https://raw.githubusercontent.com/GabrielaFiona/gabi-assets/eaca12e87cdb3a713c30fb172c4696f68b5a9985/classicshorthairhs.jpeg" alt="Gabriela Fiona" class="profile-img">
+        </div>
+        <div class="about-mini-bio">
+          <span class="eyebrow">Gabriela Fiona Cadena</span>
+          <p>Digital architect for the Oregon Coast and beyond. I build structures that bridge the gap between complex tech and human connection.</p>
+        </div>
       </div>
 
-      <div id="form-main-contact" class="dropdown-form-container" style="max-width: 600px; margin: 2rem auto 0 auto; width: 100%;">
-        <h3>Start a Project</h3>
-        <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Who should I contact?" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="What's the best email?" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell me about your business goals..." required></textarea>
-          </div>
-          <button type="submit" class="btn-primary btn-submit">Send Message</button>
-        </form>
+      <div class="about-text-content">
+        <h3>Hi, thanks for visiting!</h3>
+        <p>
+          I'm Gabriela. I combine creative design with structural logic to build websites that don't just sit there—they work. With a background in marketing and technical problem solving, I act as a partner in your business.
+        </p>
+        <p>
+          Whether you are looking to launch a brand new platform or need a strategic workaround for an existing system, I focus on honest problem solving and clear communication.
+        </p>
+        
+        <div class="about-actions" style="justify-content: flex-start;">
+          <a href="https://gabrielafiona.com/" target="_blank" class="btn-primary">View Full Portfolio</a>
+          <button class="btn-secondary toggle-form-btn" data-target="form-main-contact">Contact Me</button>
+        </div>
+
+        <div id="form-main-contact" class="dropdown-form-container">
+          <h3>Start a Project</h3>
+          <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Who should I contact?" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="What's the best email?" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your business goals..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-submit">Send Message</button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
