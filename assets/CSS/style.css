@@ -640,3 +640,63 @@ p { font-size: 1.05rem; color: var(--text-muted); }
   content-visibility: auto; 
   contain-intrinsic-size: 1px 500px; 
 }
+
+
+/* ABOUT SECTION REDESIGN */
+.about-section .section-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.about-column-left {
+  text-align: center;
+}
+
+.about-mini-bio {
+  margin-top: 1rem;
+}
+
+.about-mini-bio p {
+  font-size: 0.95rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.about-section .about-text-content {
+  text-align: left;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.about-section .about-text-content h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.about-section .about-text-content p {
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.about-section .dropdown-form-container {
+  margin: 2rem 0 0 0; /* Align to the left of the right column */
+  max-width: 100%;
+}
+
+/* Ensure the profile container stays sized correctly in the grid */
+.about-section .profile-img-container {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 800px) {
+  .about-section .about-text-content {
+    text-align: center;
+    align-items: center;
+  }
+  .about-section .about-text-content p {
+    text-align: center;
+  }
+  .about-section .about-actions {
+    justify-content: center !important;
+  }
+}
