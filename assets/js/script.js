@@ -186,30 +186,43 @@ toggleButtons.forEach(btn => {
   });
 });
 
-// 7. Header "Start a Project" Logic
-const startProjectLink = document.querySelector('.open-form-link');
+// 7. Header "Start a Project" & Cross-Page Form Logic
+const handleFormOpening = () => {
+  const targetInput = document.querySelector('#name');
+  if (targetInput) {
+    // 1. Find and open the dropdown container
+    const parentContainer = targetInput.closest('.dropdown-form-container');
+    if (parentContainer) {
+      parentContainer.classList.add('active');
+    }
 
+    // 2. Smooth scroll to the container
+    parentContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // 3. Focus the input after a short delay
+    setTimeout(() => {
+      targetInput.focus();
+    }, 600);
+  }
+};
+
+// Handle clicks on the button (for same-page interaction)
+const startProjectLink = document.querySelector('.open-form-link');
 if (startProjectLink) {
   startProjectLink.addEventListener('click', function(e) {
-    const targetId = this.getAttribute('href'); // #name
-    const targetInput = document.querySelector(targetId);
-    
-    if (targetInput) {
+    // If we are already on index.html, handle it via JS
+    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
       e.preventDefault();
-      
-      // 1. Find the parent dropdown container and open it
-      const parentContainer = targetInput.closest('.dropdown-form-container');
-      if (parentContainer) {
-        parentContainer.classList.add('active');
-      }
-
-      // 2. Smooth scroll to the form
-      parentContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // 3. Focus the input so the user can start typing immediately
-      setTimeout(() => {
-        targetInput.focus();
-      }, 500); // Small delay to allow scroll animation to finish
+      handleFormOpening();
     }
+    // If on another page, the browser will naturally navigate to index.html#name
   });
 }
+
+// Handle page load (for cross-page interaction from Flexible Services)
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash === '#name') {
+    // Small delay to ensure "Reveal" animations don't interfere with scroll
+    setTimeout(handleFormOpening, 500);
+  }
+});
