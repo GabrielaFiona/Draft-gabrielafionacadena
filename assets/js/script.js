@@ -185,3 +185,31 @@ toggleButtons.forEach(btn => {
     }
   });
 });
+
+// 7. Header "Start a Project" Logic
+const startProjectLink = document.querySelector('.open-form-link');
+
+if (startProjectLink) {
+  startProjectLink.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href'); // #name
+    const targetInput = document.querySelector(targetId);
+    
+    if (targetInput) {
+      e.preventDefault();
+      
+      // 1. Find the parent dropdown container and open it
+      const parentContainer = targetInput.closest('.dropdown-form-container');
+      if (parentContainer) {
+        parentContainer.classList.add('active');
+      }
+
+      // 2. Smooth scroll to the form
+      parentContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // 3. Focus the input so the user can start typing immediately
+      setTimeout(() => {
+        targetInput.focus();
+      }, 500); // Small delay to allow scroll animation to finish
+    }
+  });
+}
