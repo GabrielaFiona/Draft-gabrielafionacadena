@@ -206,23 +206,25 @@ const handleFormOpening = () => {
   }
 };
 
-// Handle clicks on the button (for same-page interaction)
+// Handle clicks on the button (Improved path detection)
 const startProjectLink = document.querySelector('.open-form-link');
 if (startProjectLink) {
   startProjectLink.addEventListener('click', function(e) {
-    // If we are already on index.html, handle it via JS
-    if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+    const path = window.location.pathname;
+    // Checks if we are on the homepage, index.html, or a local root path
+    const isIndexPage = path.endsWith('index.html') || path === '/' || path.endsWith('/') || path === '';
+
+    if (isIndexPage) {
       e.preventDefault();
       handleFormOpening();
     }
-    // If on another page, the browser will naturally navigate to index.html#name
   });
 }
 
-// Handle page load (for cross-page interaction from Flexible Services)
-window.addEventListener('DOMContentLoaded', () => {
+// Handle page load (for cross-page interaction)
+window.addEventListener('load', () => {
   if (window.location.hash === '#name') {
-    // Small delay to ensure "Reveal" animations don't interfere with scroll
-    setTimeout(handleFormOpening, 500);
+    // Changed to 'load' to ensure all elements and styles are fully ready
+    setTimeout(handleFormOpening, 600);
   }
 });
