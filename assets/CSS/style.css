@@ -700,3 +700,14 @@ p { font-size: 1.05rem; color: var(--text-muted); }
     justify-content: center !important;
   }
 }
+
+/* Tighten heading spacing */
+h2 {
+  line-height: 1.1;       /* Brings the lines closer together vertically */
+  letter-spacing: -0.03em; /* Pulls the letters slightly closer together horizontally */
+}
+
+/* Specifically target the Philosophy section if you only want it there */
+.section.philosophy h2 {
+  margin-bottom: 0.8rem; /* Reduces the gap between the title and the paragraph below it */
+}
