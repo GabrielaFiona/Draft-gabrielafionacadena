@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabriela's Design Lab v5.1</title>
+  <title>Gabriela's Design Lab v5.2</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,10 +24,10 @@
       --note-bg: #1e1e24;
       --note-border: #ffd700;
       
-      /* Dynamic Colors for the User to Change */
-      --user-primary: #6C5CE7;
-      --user-secondary: #a29bfe;
-      --user-bg: #ffffff;
+      /* Dynamic User Colors */
+      --user-1: #6C5CE7;
+      --user-2: #a29bfe;
+      --user-3: #ffffff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,69 +37,60 @@
     header { text-align: center; margin-bottom: 30px; }
     h1 { font-family: var(--font-head); font-style: italic; font-size: 2.5rem; }
 
-    /* Spacing Update */
-    .intro-text { color: var(--text-mute); font-size: 0.95rem; margin-bottom: 50px; }
+    /* PARAGRAPH SPACING */
+    .intro-p { color: var(--text-mute); font-size: 0.95rem; margin-bottom: 60px; }
 
-    /* Color Picker UI */
-    .color-controls { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; background: var(--glass); padding: 15px; border-radius: 12px; }
-    .picker-group { text-align: center; font-size: 0.7rem; color: var(--text-mute); }
-    .color-controls input { display: block; margin-top: 5px; cursor: pointer; border: none; background: none; }
+    /* COLOR CIRCLES UI */
+    .color-section { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
+    .color-node { text-align: center; }
+    .circle-picker {
+      width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border);
+      cursor: pointer; overflow: hidden; display: block; margin: 0 auto 8px;
+      transition: transform 0.2s;
+    }
+    .circle-picker:hover { transform: scale(1.1); border-color: #fff; }
+    .circle-picker input { opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .color-label { font-size: 0.7rem; color: var(--text-mute); font-weight: 600; }
 
-    /* SEARCH */
+    /* SEARCH & TAGS */
     .search-input {
       width: 100%; padding: 16px 24px; border-radius: 30px;
       background: #15151a; border: 1px solid var(--border);
       color: #fff; font-size: 1rem; margin-bottom: 20px; outline: none;
     }
-    
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 30px; max-height: 120px; overflow-y: auto; }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 30px; max-height: 150px; overflow-y: auto; }
     .tag { padding: 6px 14px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; font-size: 0.75rem; color: var(--text-mute); cursor: pointer; }
     .tag.active { border-color: var(--accent); color: #fff; background: var(--accent-glow); }
 
     /* PHONE MOCKUP */
     .phone-mockup {
-      width: 300px; height: 580px; margin: 0 auto 30px;
-      border: 12px solid #252525; border-radius: 45px;
+      width: 290px; height: 560px; margin: 0 auto 30px;
+      border: 10px solid #252525; border-radius: 40px;
       background: #000; position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
-    .phone-screen { 
-        height: 100%; 
-        background: var(--user-bg); 
-        overflow-y: auto; 
-        display: flex; 
-        flex-direction: column; 
-        padding-bottom: 40px; 
-        border-radius: 30px;
-    }
+    .phone-screen { height: 100%; background: var(--user-3); overflow-y: auto; display: flex; flex-direction: column; padding-top: 10px; border-radius: 30px; }
     .phone-screen::-webkit-scrollbar { display: none; }
 
-    /* WIREFRAME COMPONENTS */
-    .w-comp { cursor: grab; transition: background 0.2s; position: relative; }
-    .w-comp:active { cursor: grabbing; }
-    .sortable-ghost { opacity: 0.3; background: var(--accent-glow); }
+    /* DRAGGABLE REALISTIC ELEMENTS */
+    .w-item { cursor: grab; position: relative; width: 100%; }
+    .w-item:active { cursor: grabbing; }
+    .sortable-ghost { opacity: 0.4; background: var(--accent-glow); border: 1px dashed var(--accent); }
 
-    .w-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
-    .w-logo { font-weight: 800; font-size: 0.8rem; color: var(--user-primary); }
-    .w-nav-dots { display: flex; gap: 4px; }
-    .w-dot { width: 4px; height: 4px; background: #ccc; border-radius: 50%; }
-
-    .w-hero { padding: 40px 20px; text-align: center; background: var(--user-bg); }
-    .w-hero-title { height: 18px; width: 80%; background: #222; margin: 0 auto 10px; border-radius: 2px; }
-    .w-hero-sub { height: 8px; width: 60%; background: #ddd; margin: 0 auto 20px; border-radius: 2px; }
+    .w-header { height: 45px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; padding: 0 15px; align-items: center; }
+    .w-logo { width: 50px; height: 8px; background: var(--user-1); border-radius: 2px; }
     
-    .w-btn { 
-        display: inline-block; padding: 10px 20px; 
-        background: var(--user-primary); color: #fff; 
-        font-size: 0.7rem; border-radius: 4px; font-weight: 600;
-    }
-
-    .w-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
-    .w-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #eee; }
+    .w-hero.modern { padding: 30px 15px; text-align: center; }
+    .w-hero.visual { height: 180px; background: var(--user-2); display: flex; align-items: flex-end; padding: 15px; }
+    
+    .w-h1 { height: 14px; background: #222; margin: 0 auto 10px; width: 75%; border-radius: 2px; }
+    .w-line { height: 6px; background: #ddd; margin-bottom: 6px; border-radius: 3px; }
+    .w-btn { padding: 8px 16px; background: var(--user-1); color: #fff; font-size: 0.6rem; font-weight: bold; border-radius: 4px; display: inline-block; }
+    
+    .w-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
+    .w-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .w-card-img { height: 70px; background: #f0f0f0; }
-    .w-card-text { padding: 10px; }
-    .w-line-sm { height: 4px; background: #eee; margin-bottom: 4px; width: 100%; }
-
+    
     .strategy-card { background: var(--note-bg); border-left: 4px solid var(--note-border); border-radius: 8px; padding: 20px; margin-top: 20px; }
     .hidden { display: none !important; }
   </style>
@@ -109,20 +100,29 @@
   <div class="container">
     <header>
       <h1>Website Layout Guide</h1>
-      <span class="brief-label">Step 3: Visual Structure</span>
+      <span class="brief-label">See how we can structure your site for maximum impact.</span>
     </header>
     
-    <p class="intro-text">
-        Customize your site's DNA. Pick your brand colors, choose your industry, and <b>drag the elements</b> inside the phone to reorder your layout.
+    <p class="intro-p">
+      My custom Onboarding Dashboard helps us organize assets, plan integrations, and map out your site in 4 steps. The third step revolves around planning the look and feel of each page. You can either leave it to me or customize everything yourself. This demo is a smaller version. Feel free to play with the layout elements and check out my industry-specific design tips below!
     </p>
 
-    <div class="color-controls">
-        <div class="picker-group">Primary <input type="color" id="colorPrimary" value="#6C5CE7"></div>
-        <div class="picker-group">Secondary <input type="color" id="colorSecondary" value="#a29bfe"></div>
-        <div class="picker-group">Page Background <input type="color" id="colorBg" value="#ffffff"></div>
+    <div class="color-section">
+      <div class="color-node">
+        <label class="circle-picker" id="circ1" style="background: var(--user-1);"><input type="color" oninput="updateColor(1, this.value)" value="#6C5CE7"></label>
+        <span class="color-label">#1</span>
+      </div>
+      <div class="color-node">
+        <label class="circle-picker" id="circ2" style="background: var(--user-2);"><input type="color" oninput="updateColor(2, this.value)" value="#a29bfe"></label>
+        <span class="color-label">#2</span>
+      </div>
+      <div class="color-node">
+        <label class="circle-picker" id="circ3" style="background: var(--user-3); border: 1px solid #ccc;"><input type="color" oninput="updateColor(3, this.value)" value="#ffffff"></label>
+        <span class="color-label">#3</span>
+      </div>
     </div>
 
-    <input type="text" class="search-input" id="industryInput" placeholder="Search industries..." oninput="filterIndustries(this.value)">
+    <input type="text" class="search-input" id="industryInput" placeholder="Search industries (e.g. Brewery, SaaS, Salon)..." oninput="filterIndustries(this.value)">
     <div class="tag-cloud" id="tagCloud"></div>
 
     <div class="phone-mockup">
@@ -133,69 +133,89 @@
       <div class="note-body" id="noteText"></div>
     </div>
 
-    <div style="text-align: center; margin-top: 40px;">
-        <a href="index.html#name" class="btn-main">Start Your Project</a>
+    <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border);">
+      <a href="index.html#name" class="btn-main" style="text-decoration:none; padding:16px 32px; background:var(--accent); color:white; border-radius:50px; font-weight:600;">Start Your Project</a>
     </div>
   </div>
 
   <script>
     const screen = document.getElementById('screen');
+    
+    // Smooth Drag & Drop
+    new Sortable(screen, { animation: 150, ghostClass: 'sortable-ghost' });
 
-    // Initialize Draggable (SortableJS)
-    new Sortable(screen, {
-        animation: 150,
-        ghostClass: 'sortable-ghost'
-    });
-
-    // Color Logic
-    const root = document.querySelector(':root');
-    document.getElementById('colorPrimary').addEventListener('input', (e) => root.style.setProperty('--user-primary', e.target.value));
-    document.getElementById('colorSecondary').addEventListener('input', (e) => root.style.setProperty('--user-secondary', e.target.value));
-    document.getElementById('colorBg').addEventListener('input', (e) => root.style.setProperty('--user-bg', e.target.value));
+    function updateColor(num, val) {
+      document.documentElement.style.setProperty(`--user-${num}`, val);
+      document.getElementById(`circ${num}`).style.background = val;
+    }
 
     const INDUSTRY_DATA = {
-      "SaaS / Tech": { layout: ["nav", "hero", "grid", "text"], cat: "Tech" },
-      "Coffee Shop": { layout: ["nav", "hero", "text", "grid"], cat: "Food" },
-      "Portfolio": { layout: ["nav", "grid", "text"], cat: "Art" },
-      "Law Firm": { layout: ["nav", "text", "hero", "grid"], cat: "Service" }
+      "Bakery / Donut Shop": { layout: "L-01", cat: "Food" },
+      "Brewery / Distillery / Winery": { layout: "L-01", cat: "Food" },
+      "Coffee Shop / Café": { layout: "L-01", cat: "Food" },
+      "Food Truck": { layout: "L-01", cat: "Food" },
+      "Restaurant": { layout: "L-01", cat: "Food" },
+      "Art Gallery": { layout: "L-19", cat: "Art" },
+      "Boutique / Jewelry": { layout: "L-20", cat: "Retail" },
+      "Florist": { layout: "L-01", cat: "Retail" },
+      "Home Décor": { layout: "L-20", cat: "Retail" },
+      "Automotive": { layout: "L-21", cat: "Service" },
+      "Beauty / Salon / Spa": { layout: "L-01", cat: "Health" },
+      "Construction / Home": { layout: "L-21", cat: "Service" },
+      "Fitness / Gym / Yoga": { layout: "L-01", cat: "Health" },
+      "Law / Financial": { layout: "L-23", cat: "Service" },
+      "Real Estate": { layout: "L-24", cat: "Service" },
+      "Hotel / B&B": { layout: "L-01", cat: "Travel" },
+      "Tech Startup": { layout: "L-24", cat: "Tech" },
+      "SaaS": { layout: "L-24", cat: "Tech" },
+      "Photography": { layout: "L-19", cat: "Art" },
+      "Nonprofit": { layout: "L-23", cat: "Service" }
     };
 
-    const COMPONENTS = {
-      nav: () => `<div class="w-comp w-header"><div class="w-logo">DESIGN.LAB</div><div class="w-nav-dots"><div class="w-dot"></div><div class="w-dot"></div></div></div>`,
-      hero: () => `<div class="w-comp w-hero"><div class="w-hero-title"></div><div class="w-hero-sub"></div><div class="w-btn">Get Started</div></div>`,
-      grid: () => `<div class="w-comp w-grid-2">${Array(4).fill('<div class="w-card"><div class="w-card-img"></div><div class="w-card-text"><div class="w-line-sm"></div><div class="w-line-sm" style="width:60%"></div></div></div>').join('')}</div>`,
-      text: () => `<div class="w-comp" style="padding:20px;"><div class="w-line-sm" style="height:8px; background:#444"></div><div class="w-line-sm"></div><div class="w-line-sm"></div><div class="w-line-sm" style="width:40%"></div></div>`
+    const LAYOUT_MAP = {
+      "L-01": ["header", "heroVisual:Welcome", "text", "grid", "footer"],
+      "L-19": ["header", "heroModern:Portfolio", "grid", "text", "footer"],
+      "L-20": ["header", "heroVisual:Shop", "grid", "footer"],
+      "L-21": ["header", "heroModern:Service", "text", "grid", "footer"],
+      "L-23": ["header", "heroModern:Expert", "text", "grid", "footer"],
+      "L-24": ["header", "heroModern:SaaS", "grid", "footer"],
+      "default": ["header", "heroModern", "text", "footer"]
+    };
+
+    const RENDERERS = {
+      header: () => `<div class="w-item w-header"><div class="w-logo"></div><div style="width:10px;height:10px;background:#eee;border-radius:50%"></div></div>`,
+      heroModern: (t="View More") => `<div class="w-item w-hero modern"><div class="w-h1"></div><div class="w-line" style="width:60%;margin:0 auto 15px;"></div><div class="w-btn">${t}</div></div>`,
+      heroVisual: (t="Enter") => `<div class="w-item w-hero visual"><div class="w-btn">${t}</div></div>`,
+      grid: () => `<div class="w-item w-grid-2">${Array(4).fill('<div class="w-card"><div class="w-card-img"></div><div style="padding:8px"><div class="w-line" style="width:70%"></div></div></div>').join('')}</div>`,
+      text: () => `<div class="w-item" style="padding:15px;"><div class="w-line"></div><div class="w-line"></div><div class="w-line" style="width:50%"></div></div>`,
+      footer: () => `<div class="w-item" style="background:#1a1a1a;height:50px;margin-top:auto;"><div class="w-line" style="background:#333;width:30%;margin:15px;"></div></div>`
     };
 
     function selectIndustry(name) {
-      const data = INDUSTRY_DATA[name];
+      document.querySelectorAll('.tag').forEach(t => t.classList.toggle('active', t.innerText === name));
+      const data = INDUSTRY_DATA[name] || { layout: "default", cat: "" };
+      const struct = LAYOUT_MAP[data.layout] || LAYOUT_MAP["default"];
       screen.innerHTML = '';
-      data.layout.forEach(type => {
-        if(COMPONENTS[type]) screen.insertAdjacentHTML('beforeend', COMPONENTS[type]());
+      struct.forEach(s => {
+        const [func, arg] = s.split(':');
+        if(RENDERERS[func]) screen.insertAdjacentHTML('beforeend', RENDERERS[func](arg));
       });
-      
       document.getElementById('strategyCard').classList.remove('hidden');
-      document.getElementById('noteText').innerHTML = `💡 <b>Tip for ${name}:</b> This layout focuses on conversion. Move the elements around to see what feels best for your brand flow!`;
+      document.getElementById('noteText').innerHTML = `💡 <b>Designer's Insight:</b> For ${name}, this layout is optimized for engagement. Try dragging elements to test your own flow!`;
     }
 
     function filterIndustries(val) {
       const cloud = document.getElementById('tagCloud');
       cloud.innerHTML = '';
-      Object.keys(INDUSTRY_DATA).forEach(ind => {
-        if(ind.toLowerCase().includes(val.toLowerCase())) {
-          const t = document.createElement('div');
-          t.className = 'tag';
-          t.innerText = ind;
-          t.onclick = () => selectIndustry(ind);
-          cloud.appendChild(t);
-        }
+      Object.keys(INDUSTRY_DATA).filter(k => k.toLowerCase().includes(val.toLowerCase())).slice(0, 10).forEach(ind => {
+        const t = document.createElement('div');
+        t.className = 'tag'; t.innerText = ind;
+        t.onclick = () => selectIndustry(ind);
+        cloud.appendChild(t);
       });
     }
 
-    window.onload = () => {
-      filterIndustries('');
-      selectIndustry("SaaS / Tech");
-    };
+    window.onload = () => { filterIndustries(''); selectIndustry("Coffee Shop / Café"); };
   </script>
 </body>
 </html>
