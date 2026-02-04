@@ -720,3 +720,16 @@ h2 {
   width: 100%;
   margin: 20px 0;         /* Adds space above and below the group */
 }
+
+/* Centers content in the Onboarding Hub Preview section */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.stat-card .center-cta {
+  margin-top: 1.5rem;
+}
