@@ -133,8 +133,10 @@
       <div class="note-body" id="noteText"></div>
     </div>
 
-    <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border);">
-      <a href="index.html#name" class="btn-main" style="text-decoration:none; padding:16px 32px; background:var(--accent); color:white; border-radius:50px; font-weight:600;">Start Your Project</a>
+    <div class="final-cta fade-in">
+      <h2 style="font-family:var(--font-head); margin-bottom:10px;">Ready to build this?</h2>
+      <p style="color:var(--text-mute); margin-bottom:20px; font-size:0.9rem;">I can bring this structure to life with your branding.</p>
+      <button class="btn-main" onclick="alert('This would link to your contact form!')">Start Your Project</button>
     </div>
   </div>
 
@@ -208,7 +210,7 @@
       const cloud = document.getElementById('tagCloud');
       cloud.innerHTML = '';
       Object.keys(INDUSTRY_DATA).filter(k => k.toLowerCase().includes(val.toLowerCase())).slice(0, 10).forEach(ind => {
-        const t = document.createElement('div');
+        ctaronst t = document.createElement('div');
         t.className = 'tag'; t.innerText = ind;
         t.onclick = () => selectIndustry(ind);
         cloud.appendChild(t);
