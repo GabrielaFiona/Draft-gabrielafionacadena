@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabriela's Design Lab v5</title>
+  <title>Gabriela's Design Lab v5.1</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 
   <style>
     :root {
@@ -22,6 +23,11 @@
       --font-body: 'Inter', sans-serif;
       --note-bg: #1e1e24;
       --note-border: #ffd700;
+      
+      /* Dynamic Colors for the User to Change */
+      --user-primary: #6C5CE7;
+      --user-secondary: #a29bfe;
+      --user-bg: #ffffff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,15 +37,13 @@
     header { text-align: center; margin-bottom: 30px; }
     h1 { font-family: var(--font-head); font-style: italic; font-size: 2.5rem; }
 
-    .content-brief {
-      background: var(--glass);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 40px;
-    }
-    .brief-label { color: var(--accent); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 12px; }
-    .brief-text { font-size: 0.95rem; color: #e0e0e0; }
+    /* Spacing Update */
+    .intro-text { color: var(--text-mute); font-size: 0.95rem; margin-bottom: 50px; }
+
+    /* Color Picker UI */
+    .color-controls { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; background: var(--glass); padding: 15px; border-radius: 12px; }
+    .picker-group { text-align: center; font-size: 0.7rem; color: var(--text-mute); }
+    .color-controls input { display: block; margin-top: 5px; cursor: pointer; border: none; background: none; }
 
     /* SEARCH */
     .search-input {
@@ -47,65 +51,56 @@
       background: #15151a; border: 1px solid var(--border);
       color: #fff; font-size: 1rem; margin-bottom: 20px; outline: none;
     }
-    .search-input:focus { border-color: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
     
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 30px; max-height: 150px; overflow-y: auto; }
-    .tag {
-      padding: 6px 14px; background: var(--glass); border: 1px solid var(--border);
-      border-radius: 20px; font-size: 0.75rem; color: var(--text-mute); cursor: pointer; transition: 0.2s;
-    }
-    .tag:hover, .tag.active { border-color: var(--accent); color: #fff; background: var(--accent-glow); }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 30px; max-height: 120px; overflow-y: auto; }
+    .tag { padding: 6px 14px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; font-size: 0.75rem; color: var(--text-mute); cursor: pointer; }
+    .tag.active { border-color: var(--accent); color: #fff; background: var(--accent-glow); }
 
     /* PHONE MOCKUP */
     .phone-mockup {
-      width: 280px; height: 540px; margin: 0 auto 30px;
-      border: 8px solid #252525; border-radius: 40px;
-      background: #000; overflow: hidden; position: relative;
+      width: 300px; height: 580px; margin: 0 auto 30px;
+      border: 12px solid #252525; border-radius: 45px;
+      background: #000; position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
-    .phone-screen { height: 100%; background: #fff; overflow-y: auto; display: flex; flex-direction: column; padding-top: 20px; }
+    .phone-screen { 
+        height: 100%; 
+        background: var(--user-bg); 
+        overflow-y: auto; 
+        display: flex; 
+        flex-direction: column; 
+        padding-bottom: 40px; 
+        border-radius: 30px;
+    }
     .phone-screen::-webkit-scrollbar { display: none; }
 
-    /* INSIGHT BUBBLE (Placed under mockup) */
-    .strategy-card {
-      background: var(--note-bg);
-      border-left: 4px solid var(--note-border);
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 20px;
-      animation: slideUp 0.4s ease forwards;
+    /* WIREFRAME COMPONENTS */
+    .w-comp { cursor: grab; transition: background 0.2s; position: relative; }
+    .w-comp:active { cursor: grabbing; }
+    .sortable-ghost { opacity: 0.3; background: var(--accent-glow); }
+
+    .w-header { padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .w-logo { font-weight: 800; font-size: 0.8rem; color: var(--user-primary); }
+    .w-nav-dots { display: flex; gap: 4px; }
+    .w-dot { width: 4px; height: 4px; background: #ccc; border-radius: 50%; }
+
+    .w-hero { padding: 40px 20px; text-align: center; background: var(--user-bg); }
+    .w-hero-title { height: 18px; width: 80%; background: #222; margin: 0 auto 10px; border-radius: 2px; }
+    .w-hero-sub { height: 8px; width: 60%; background: #ddd; margin: 0 auto 20px; border-radius: 2px; }
+    
+    .w-btn { 
+        display: inline-block; padding: 10px 20px; 
+        background: var(--user-primary); color: #fff; 
+        font-size: 0.7rem; border-radius: 4px; font-weight: 600;
     }
-    .note-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .note-title { font-family: var(--font-head); font-weight: 600; color: #fff; }
-    .note-body { font-size: 0.9rem; color: #d1d1d1; line-height: 1.6; }
 
-    /* FINAL CTA */
-    .final-cta { text-align: center; margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border); }
-    .btn-main {
-      display: inline-block; text-decoration: none;
-      padding: 16px 32px; background: var(--accent); color: white; border-radius: 50px;
-      font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
-      box-shadow: 0 5px 20px var(--accent-glow); transition: 0.3s;
-    }
-    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--accent-glow); }
+    .w-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px; }
+    .w-card { background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #eee; }
+    .w-card-img { height: 70px; background: #f0f0f0; }
+    .w-card-text { padding: 10px; }
+    .w-line-sm { height: 4px; background: #eee; margin-bottom: 4px; width: 100%; }
 
-    /* CSS ART */
-    .w-header { height: 45px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; padding: 0 15px; align-items: center; flex-shrink: 0; }
-    .w-logo { width: 60px; height: 10px; background: #222; border-radius: 2px; }
-    .w-hero { width: 100%; flex-shrink: 0; }
-    .w-hero.modern { height: 160px; background: #f8f9fa; padding: 25px; text-align: center; }
-    .w-hero.visual { height: 200px; background-color: #ccc; display: flex; align-items: flex-end; padding: 15px; }
-    .w-h1 { height: 14px; background: #222; margin: 0 auto 10px; width: 70%; border-radius: 2px; }
-    .w-line { height: 6px; background: #ddd; margin-bottom: 6px; border-radius: 3px; }
-    .w-btn { padding: 8px 16px; background: #222; color: #fff; font-size: 0.6rem; font-weight: bold; border-radius: 20px; display: inline-block; }
-    .w-btn.accent { background: var(--accent); }
-    .w-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
-    .w-card { background: #f4f4f4; border-radius: 6px; overflow: hidden; }
-    .w-card-img { height: 80px; background: #e0e0e0; }
-    .w-text-block { padding: 15px; }
-    .w-footer { background: #1a1a1a; height: 80px; margin-top: auto; padding: 15px; }
-
-    @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .strategy-card { background: var(--note-bg); border-left: 4px solid var(--note-border); border-radius: 8px; padding: 20px; margin-top: 20px; }
     .hidden { display: none !important; }
   </style>
 </head>
@@ -114,14 +109,20 @@
   <div class="container">
     <header>
       <h1>Website Layout Guide</h1>
-      <span class="brief-label">See how we can structure your site for maximum impact.</span>
+      <span class="brief-label">Step 3: Visual Structure</span>
     </header>
     
-<p style="color: var(--text-mute); font-size: 0.95rem;">My custom Onboarding Dashboard helps us organize assets, plan integrations, and map out your site in 4 steps. The third step revolves around planning the look and feel of each page. You can either leave it to me or customize everything yourself. This demo is a smaller version. Feel free to play with the layout elements and check out my industry-specific design tips below!
-</p>
+    <p class="intro-text">
+        Customize your site's DNA. Pick your brand colors, choose your industry, and <b>drag the elements</b> inside the phone to reorder your layout.
+    </p>
 
-    <input type="text" class="search-input" id="industryInput" placeholder="Search industries (e.g. Brewery, SaaS, Salon)..." oninput="filterIndustries(this.value)">
-    
+    <div class="color-controls">
+        <div class="picker-group">Primary <input type="color" id="colorPrimary" value="#6C5CE7"></div>
+        <div class="picker-group">Secondary <input type="color" id="colorSecondary" value="#a29bfe"></div>
+        <div class="picker-group">Page Background <input type="color" id="colorBg" value="#ffffff"></div>
+    </div>
+
+    <input type="text" class="search-input" id="industryInput" placeholder="Search industries..." oninput="filterIndustries(this.value)">
     <div class="tag-cloud" id="tagCloud"></div>
 
     <div class="phone-mockup">
@@ -129,110 +130,71 @@
     </div>
 
     <div id="strategyCard" class="strategy-card hidden">
-      <div class="note-header">
-        <span style="font-size:1.2rem;">💡</span>
-        <span class="note-title">Designer's Insight</span>
-      </div>
       <div class="note-body" id="noteText"></div>
     </div>
 
-    <div class="final-cta">
-      <h2 style="font-family:var(--font-head); margin-bottom:10px;">Ready to build this?</h2>
-      <p style="color:var(--text-mute); margin-bottom:20px; font-size:0.9rem;">I can bring this structure to life with your branding.</p>
-      <a href="index.html#name" class="btn-main open-form-link">Start Your Project</a>
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="index.html#name" class="btn-main">Start Your Project</a>
     </div>
   </div>
 
   <script>
+    const screen = document.getElementById('screen');
+
+    // Initialize Draggable (SortableJS)
+    new Sortable(screen, {
+        animation: 150,
+        ghostClass: 'sortable-ghost'
+    });
+
+    // Color Logic
+    const root = document.querySelector(':root');
+    document.getElementById('colorPrimary').addEventListener('input', (e) => root.style.setProperty('--user-primary', e.target.value));
+    document.getElementById('colorSecondary').addEventListener('input', (e) => root.style.setProperty('--user-secondary', e.target.value));
+    document.getElementById('colorBg').addEventListener('input', (e) => root.style.setProperty('--user-bg', e.target.value));
+
     const INDUSTRY_DATA = {
-      "Bakery / Donut Shop": { layout: "L-01", cat: "Food" },
-      "Brewery / Distillery / Winery": { layout: "L-01", cat: "Food" },
-      "Coffee Shop / Café": { layout: "L-01", cat: "Food" },
-      "Food Truck": { layout: "L-01", cat: "Food" },
-      "Restaurant": { layout: "L-01", cat: "Food" },
-      "Art Gallery": { layout: "L-19", cat: "Art" },
-      "Boutique / Jewelry": { layout: "L-20", cat: "Retail" },
-      "Florist": { layout: "L-01", cat: "Retail" },
-      "Home Décor": { layout: "L-20", cat: "Retail" },
-      "Automotive": { layout: "L-21", cat: "Service" },
-      "Beauty / Salon / Spa": { layout: "L-01", cat: "Health" },
-      "Construction / Home": { layout: "L-21", cat: "Service" },
-      "Fitness / Gym / Yoga": { layout: "L-01", cat: "Health" },
-      "Law / Financial": { layout: "L-23", cat: "Service" },
-      "Real Estate": { layout: "L-24", cat: "Service" },
-      "Hotel / B&B": { layout: "L-01", cat: "Travel" },
-      "Tech Startup": { layout: "L-24", cat: "Tech" },
-      "SaaS": { layout: "L-24", cat: "Tech" },
-      "Photography": { layout: "L-19", cat: "Art" },
-      "Nonprofit": { layout: "L-23", cat: "Service" }
+      "SaaS / Tech": { layout: ["nav", "hero", "grid", "text"], cat: "Tech" },
+      "Coffee Shop": { layout: ["nav", "hero", "text", "grid"], cat: "Food" },
+      "Portfolio": { layout: ["nav", "grid", "text"], cat: "Art" },
+      "Law Firm": { layout: ["nav", "text", "hero", "grid"], cat: "Service" }
     };
 
-    const LAYOUT_MAP = {
-      "L-01": ["header", "heroVisual:Welcome", "textBlock", "grid2", "footer"],
-      "L-19": ["header", "heroModern:Portfolio", "grid2", "textBlock", "footer"],
-      "L-20": ["header", "heroVisual:Shop", "grid2", "cta:Explore", "footer"],
-      "L-21": ["header", "heroModern:Trusted Service", "textBlock", "grid2", "footer"],
-      "L-23": ["header", "heroModern:Expert Advice", "textBlock", "grid2", "footer"],
-      "L-24": ["header", "heroModern:Find Your Fit", "grid2", "footer"],
-      "default": ["header", "heroModern", "textBlock", "footer"]
-    };
-
-    const RENDERERS = {
-      header: () => `<div class="w-header"><div class="w-logo"></div><div style="width:12px;height:12px;background:#eee;border-radius:50%"></div></div>`,
-      heroModern: (txt="View More") => `<div class="w-hero modern"><div class="w-h1"></div><div class="w-line" style="width:50%;margin:0 auto 12px;"></div><div class="w-btn">${txt}</div></div>`,
-      heroVisual: (txt="Enter") => `<div class="w-hero visual"><div class="w-btn accent">${txt}</div></div>`,
-      grid2: () => `<div class="w-grid-2">${Array(4).fill('<div class="w-card"><div class="w-card-img"></div><div style="padding:8px"><div class="w-line" style="width:70%"></div></div></div>').join('')}</div>`,
-      textBlock: () => `<div class="w-text-block"><div class="w-line"></div><div class="w-line"></div><div class="w-line" style="width:55%"></div></div>`,
-      cta: (txt) => `<div style="text-align:center;padding:20px;"><div class="w-btn accent">${txt}</div></div>`,
-      footer: () => `<div class="w-footer"><div class="w-line" style="background:#444;width:30%"></div></div>`
-    };
-
-    const getTip = (name, cat) => {
-      if(cat === "Food") return `For <b>${name}</b>, appetite appeal is everything. I prioritize high-quality visuals and make the Menu/Location accessible within one click.`;
-      if(cat === "Retail") return `For <b>${name}</b>, we reduce steps to checkout. I showcase 'Best Sellers' directly on the homepage to encourage browsing.`;
-      if(cat === "Service") return `Trust is the currency for <b>${name}</b>. I lead with a clear Value Proposition followed by Social Proof before asking for a quote.`;
-      if(cat === "Health") return `For <b>${name}</b>, we use a calming aesthetic and keep the 'Book Now' CTA prominent for frictionless scheduling.`;
-      if(cat === "Tech") return `Clarity wins. I use a minimal layout that explains the 'Solution' simply, validated immediately by trust badges.`;
-      if(cat === "Art") return `The work speaks for itself. I use a minimal framework that allows your portfolio images to dominate the screen.`;
-      return `For <b>${name}</b>, I recommend a balanced layout that establishes authority early with clear headlines and a direct call-to-action.`;
+    const COMPONENTS = {
+      nav: () => `<div class="w-comp w-header"><div class="w-logo">DESIGN.LAB</div><div class="w-nav-dots"><div class="w-dot"></div><div class="w-dot"></div></div></div>`,
+      hero: () => `<div class="w-comp w-hero"><div class="w-hero-title"></div><div class="w-hero-sub"></div><div class="w-btn">Get Started</div></div>`,
+      grid: () => `<div class="w-comp w-grid-2">${Array(4).fill('<div class="w-card"><div class="w-card-img"></div><div class="w-card-text"><div class="w-line-sm"></div><div class="w-line-sm" style="width:60%"></div></div></div>').join('')}</div>`,
+      text: () => `<div class="w-comp" style="padding:20px;"><div class="w-line-sm" style="height:8px; background:#444"></div><div class="w-line-sm"></div><div class="w-line-sm"></div><div class="w-line-sm" style="width:40%"></div></div>`
     };
 
     function selectIndustry(name) {
-      document.querySelectorAll('.tag').forEach(t => t.classList.toggle('active', t.innerText === name));
-      const data = INDUSTRY_DATA[name] || { layout: "default", cat: "" };
-      
-      // Render Phone
-      const structure = LAYOUT_MAP[data.layout] || LAYOUT_MAP["default"];
-      const screen = document.getElementById('screen');
+      const data = INDUSTRY_DATA[name];
       screen.innerHTML = '';
-      structure.forEach(blockStr => {
-        const [funcName, arg] = blockStr.split(':');
-        if(RENDERERS[funcName]) screen.insertAdjacentHTML('beforeend', RENDERERS[funcName](arg));
+      data.layout.forEach(type => {
+        if(COMPONENTS[type]) screen.insertAdjacentHTML('beforeend', COMPONENTS[type]());
       });
-
-      // Show Insight
-      const card = document.getElementById('strategyCard');
-      const noteText = document.getElementById('noteText');
-      card.classList.remove('hidden');
-      noteText.innerHTML = getTip(name, data.cat);
+      
+      document.getElementById('strategyCard').classList.remove('hidden');
+      document.getElementById('noteText').innerHTML = `💡 <b>Tip for ${name}:</b> This layout focuses on conversion. Move the elements around to see what feels best for your brand flow!`;
     }
 
     function filterIndustries(val) {
       const cloud = document.getElementById('tagCloud');
       cloud.innerHTML = '';
-      const matches = Object.keys(INDUSTRY_DATA).filter(k => k.toLowerCase().includes(val.toLowerCase()));
-      matches.slice(0, 10).forEach(ind => {
-        const t = document.createElement('div');
-        t.className = 'tag';
-        t.innerText = ind;
-        t.onclick = () => selectIndustry(ind);
-        cloud.appendChild(t);
+      Object.keys(INDUSTRY_DATA).forEach(ind => {
+        if(ind.toLowerCase().includes(val.toLowerCase())) {
+          const t = document.createElement('div');
+          t.className = 'tag';
+          t.innerText = ind;
+          t.onclick = () => selectIndustry(ind);
+          cloud.appendChild(t);
+        }
       });
     }
 
     window.onload = () => {
       filterIndustries('');
-      selectIndustry("Coffee Shop / Café");
+      selectIndustry("SaaS / Tech");
     };
   </script>
 </body>
