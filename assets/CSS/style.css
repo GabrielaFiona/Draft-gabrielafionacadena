@@ -715,29 +715,8 @@ h2 {
 .pill-container {
   display: flex;
   flex-direction: column; /* Stacks them vertically */
-  align-items: center;    /* Centers them horizontally */
-  gap: 15px;              /* Adds even space between buttons */
-  margin-top: 20px;
+  align-items: center;    /* This does the centering */
+  gap: 12px;              /* Adjust this for the space between buttons */
   width: 100%;
-}
-
-.pill-link {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  /* Matching your existing design aesthetic */
-  padding: 12px 24px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  color: var(--text);
-  transition: 0.3s;
-  width: fit-content;    /* Ensures the pill only grows as wide as the text */
-  max-width: 90%;        /* Prevents it from hitting screen edges */
-}
-
-.pill-link:hover {
-  border-color: var(--accent);
-  background: var(--accent-glow);
-  transform: translateY(-2px);
+  margin: 20px 0;         /* Adds space above and below the group */
 }
