@@ -69,7 +69,7 @@
           <button class="btn-secondary toggle-form-btn" data-target="form-main-contact">Contact Me</button>
         </div>
 
-        <div id="form-main-contact" class="dropdown-form-container">
+       <div id="form-main-contact" class="dropdown-form-container">
           <h3>Start a Project</h3>
           <form action="https://formspree.io/f/xrbrgbaw" method="POST" class="contact-form">
             <div class="form-group">
@@ -80,6 +80,18 @@
               <label for="email">Email</label>
               <input type="email" id="email" name="email" placeholder="What's the best email?" required>
             </div>
+            
+            <div class="form-group">
+              <label for="project_interest">Start a Project (Select all that apply)</label>
+              <select id="project_interest" name="project_interest" multiple style="height: 140px;">
+                <option value="Brand Kit Creation">Brand Kit Creation</option>
+                <option value="Basic Website Package">Basic Website Package</option>
+                <option value="Standard Website Package">Standard Website Package</option>
+                <option value="Advanced Website Package">Advanced Website Package</option>
+              </select>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">* Hold Ctrl (Windows) or Cmd (Mac) to select multiple options.</p>
+            </div>
+
             <div class="form-group">
               <label for="message">Message</label>
               <textarea id="message" name="message" rows="5" placeholder="Tell me about your business & website goals..." required></textarea>
