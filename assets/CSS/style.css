@@ -1475,6 +1475,7 @@ h2 { line-height: 1.1; letter-spacing: -0.03em; }
   }
 }
 
+
 /* ---------------------------------------------------- */
 /* ABOUT SECTION BUTTON EQUALIZING                      */
 /* ---------------------------------------------------- */
@@ -1492,6 +1493,13 @@ h2 { line-height: 1.1; letter-spacing: -0.03em; }
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin: 0; /* Prevents default margins from misaligning them */
+  margin: 0; 
   box-sizing: border-box;
+  
+  /* NEW: Forces the link and the button to have the exact same text and height rules */
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.8rem 1.5rem;
+  height: 55px;
 }
