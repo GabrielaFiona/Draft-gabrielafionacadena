@@ -736,37 +736,60 @@ h2 {
 
 
 /* ========================================= */
-/* DESKTOP ALIGNMENT FIX FOR PRICING PACKAGES */
+/* DESKTOP PACKAGE CONDENSING & ALIGNMENT    */
 /* ========================================= */
 @media (min-width: 1024px) {
   .pricing-grid {
-    /* Forces exactly 3 columns on desktop to prevent awkward wrapping */
     grid-template-columns: repeat(3, 1fr);
-    /* Centers the grid horizontally */
     justify-content: center;
     align-items: stretch;
-    max-width: 1100px;
+    max-width: 1000px; /* Brings the columns slightly closer together */
     margin: 0 auto;
   }
 
   .price-card {
-    /* Keeps the cards from getting unnecessarily wide */
-    max-width: 360px;
-    margin: 0 auto; 
+    padding: 1.5rem; /* Shrinks the outer colored bubble padding */
+    max-width: 320px; /* Slims the cards down so they don't stretch */
+    margin: 0 auto;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
-
+  
   .package-text-wrapper {
-    /* Allows the white inner box to fill the space evenly across all 3 cards */
-    flex-grow: 1;
+    padding: 1.2rem; /* Shrinks the inner white box padding */
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
   }
-  
+
+  .tier-name {
+    margin-bottom: 1rem; /* Tighter gap below the tier name */
+    font-size: 1.2rem; 
+    padding: 0.4rem 1.2rem;
+  }
+
+  .tier-desc {
+    font-size: 0.95rem; /* Scales text down slightly */
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-price {
+    font-size: 1.35rem; 
+    margin: 0.2rem 0;
+  }
+
+  .price-card hr {
+    margin: 0.75rem 0; /* Tighter margins around the divider line */
+  }
+
+  .feature-list li {
+    padding: 0.25rem 0; /* Pulls the list features closer together */
+    font-size: 0.9rem;
+  }
+
   .pill-container {
-    /* Pushes the button perfectly to the bottom of the card, keeping them aligned */
-    margin-top: auto !important;
+    margin-top: auto !important; /* Forces buttons to align at the absolute bottom */
+    padding-top: 1rem;
   }
 }
