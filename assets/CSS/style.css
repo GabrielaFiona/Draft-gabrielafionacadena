@@ -1483,12 +1483,13 @@ h2 { line-height: 1.1; letter-spacing: -0.03em; }
   display: flex;
   flex-wrap: wrap; 
   gap: 1rem;
+  width: 100%; /* Ensures the container gives them equal space on mobile */
 }
 
 .about-actions .btn-primary,
 .about-actions .btn-secondary {
-  flex: 1; 
-  min-width: 220px; 
+  flex: 1 1 200px; /* Allows them to grow evenly, but shrink if the screen is super small */
+  width: 100%; /* Forces them to match widths exactly when stacked on mobile */
   text-align: center;
   display: inline-flex;
   justify-content: center;
@@ -1496,10 +1497,14 @@ h2 { line-height: 1.1; letter-spacing: -0.03em; }
   margin: 0; 
   box-sizing: border-box;
   
-  /* NEW: Forces the link and the button to have the exact same text and height rules */
+  /* Forces the link and the button to have the exact same text and height rules */
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.5;
   padding: 0.8rem 1.5rem;
   height: 55px;
+  
+  /* NEW: Strips the mobile browser's default hidden button styling */
+  -webkit-appearance: none;
+  appearance: none;
 }
