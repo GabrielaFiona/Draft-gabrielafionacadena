@@ -33,7 +33,9 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: var(--font-body); padding: 100px 20px 40px; line-height: 1.6; }
-    .container { max-width: 550px; margin: 0 auto; }
+    
+    /* Widened container for 3-column desktop layout */
+    .container { max-width: 1050px; margin: 0 auto; }
 
     /* DARK THEME NAV BAR */
     .nav-bar {
@@ -85,10 +87,62 @@
     h1 { font-family: var(--font-head); font-style: italic; font-size: 2.5rem; }
 
     /* PARAGRAPH SPACING */
-    .intro-p { color: var(--text-mute); font-size: 0.95rem; margin-bottom: 60px; }
+    .intro-p { color: var(--text-mute); font-size: 0.95rem; margin-bottom: 60px; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+    /* --- 3-COLUMN DESKTOP LAYOUT GRID --- */
+    .desktop-layout {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Mobile stacking order */
+    .controls-column { order: 1; margin-bottom: 20px;}
+    .colors-column { order: 2; margin-bottom: 25px; }
+    .preview-column { order: 3; margin-bottom: 30px; }
+    .strategy-column { order: 4; }
+
+    @media (min-width: 850px) {
+      .desktop-layout {
+        display: grid;
+        grid-template-columns: 1fr 320px 80px; /* Left controls, Middle phone, Right colors */
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 
+          "controls preview colors"
+          "strategy preview colors";
+        gap: 0 40px;
+        align-items: start;
+      }
+      
+      .colors-column { 
+        grid-area: colors; 
+        align-self: center; /* Centers the circles vertically next to the phone */
+        margin-bottom: 0; 
+      }
+      .controls-column { grid-area: controls; margin-bottom: 0; }
+      .preview-column { 
+        grid-area: preview; 
+        align-self: center; 
+        margin-bottom: 0; 
+      }
+      .strategy-column { grid-area: strategy; }
+      
+      .tag-cloud { justify-content: flex-start !important; }
+    }
 
     /* COLOR CIRCLES UI */
-    .color-section { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
+    .color-section { 
+      display: flex; 
+      flex-direction: row; 
+      justify-content: center; 
+      gap: 30px; 
+    }
+    @media (min-width: 850px) {
+      .color-section {
+        flex-direction: column; /* Stacks vertically on desktop */
+        gap: 25px;
+      }
+    }
+    
     .color-node { text-align: center; }
     .circle-picker {
       width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border);
@@ -111,7 +165,7 @@
 
     /* PHONE MOCKUP */
     .phone-mockup {
-      width: 290px; height: 560px; margin: 0 auto 30px;
+      width: 290px; height: 560px; margin: 0 auto;
       border: 10px solid #252525; border-radius: 40px;
       background: #000; position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
@@ -132,7 +186,7 @@
     
     .w-h1 { height: 14px; background: #222; margin: 0 auto 10px; width: 75%; border-radius: 2px; }
     .w-line { height: 6px; background: #ddd; margin-bottom: 6px; border-radius: 3px; }
-    .w-btn { padding: 8px 16px; background: var(--user-1); color: #fff; font-size: 0.6rem; font-weight: bold; border-radius: 4px; display: inline-block; }
+    .w-btn { padding: 8px 16px; background: var(--user-1); color: #fff; font-size: 0.6rem; font-weight: bold; border-radius: 4px; display: inline-block; cursor: pointer; }
     
     .w-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px; }
     .w-card { background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
@@ -144,14 +198,14 @@
     /* --- NEW STYLES FOR CTA SECTION --- */
     .final-cta {
       text-align: center;
-      margin-top: 60px; /* Added spacing from tips section */
+      margin-top: 60px; 
       padding-bottom: 40px;
     }
 
     .btn-main {
       display: inline-block;
       padding: 1rem 2.5rem;
-      background-color: #4C7DFF; /* Blue to match main site */
+      background-color: #4C7DFF; 
       color: white;
       text-decoration: none;
       border-radius: 99px;
@@ -190,45 +244,56 @@
       <span class="brief-label">See how we can structure your site for maximum impact.</span>
     </header>
     
-    <p class="intro-p" style="color: var(--text-mute); font-size: 0.95rem; margin-bottom: 60px;">
+    <p class="intro-p">
       My custom Onboarding Dashboard helps us organize assets, plan integrations, and map out your site in 4 steps. The third step revolves around planning the look and feel of each page. You can either leave it to me or customize everything yourself. This demo is a smaller version. Feel free to play with the layout elements and check out my industry-specific design tips below!
     </p>
 
-    <div class="color-section" style="display: flex; justify-content: center; gap: 30px; margin-bottom: 25px;">
-      <div class="color-node" style="text-align: center;">
-        <label class="circle-picker" id="circ1" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: block; background: var(--user-1); margin: 0 auto 8px;">
-            <input type="color" oninput="updateColor(1, this.value)" value="#6C5CE7" style="opacity:0; width:100%; height:100%; cursor:pointer;">
-        </label>
-        <span style="font-size: 0.7rem; color: var(--text-mute); font-weight: 600;">#1</span>
+    <div class="desktop-layout">
+      
+      <div class="controls-column">
+        <input type="text" class="search-input" id="industryInput" placeholder="Search industries (e.g. Brewery, SaaS, Salon)..." oninput="filterIndustries(this.value)">
+        <div class="tag-cloud" id="tagCloud"></div>
       </div>
-      <div class="color-node" style="text-align: center;">
-        <label class="circle-picker" id="circ2" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: block; background: var(--user-2); margin: 0 auto 8px;">
-            <input type="color" oninput="updateColor(2, this.value)" value="#a29bfe" style="opacity:0; width:100%; height:100%; cursor:pointer;">
-        </label>
-        <span style="font-size: 0.7rem; color: var(--text-mute); font-weight: 600;">#2</span>
-      </div>
-      <div class="color-node" style="text-align: center;">
-        <label class="circle-picker" id="circ3" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: block; background: var(--user-3); margin: 0 auto 8px;">
-            <input type="color" oninput="updateColor(3, this.value)" value="#ffffff" style="opacity:0; width:100%; height:100%; cursor:pointer;">
-        </label>
-        <span style="font-size: 0.7rem; color: var(--text-mute); font-weight: 600;">#3</span>
-      </div>
-    </div>
 
-    <input type="text" class="search-input" id="industryInput" placeholder="Search industries (e.g. Brewery, SaaS, Salon)..." oninput="filterIndustries(this.value)">
-    
-    <div class="tag-cloud" id="tagCloud"></div>
-
-    <div class="phone-mockup">
-      <div class="phone-screen" id="screen"></div>
-    </div>
-
-    <div id="strategyCard" class="strategy-card hidden">
-      <div class="note-header">
-        <span style="font-size:1.2rem;">💡</span>
-        <span class="note-title">Designer's Insight</span>
+      <div class="colors-column">
+        <div class="color-section">
+          <div class="color-node" style="text-align: center;">
+            <label class="circle-picker" id="circ1" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: block; background: var(--user-1); margin: 0 auto 8px;">
+                <input type="color" oninput="updateColor(1, this.value)" value="#6C5CE7" style="opacity:0; width:100%; height:100%; cursor:pointer;">
+            </label>
+            <span style="font-size: 0.7rem; color: var(--text-mute); font-weight: 600;">#1</span>
+          </div>
+          <div class="color-node" style="text-align: center;">
+            <label class="circle-picker" id="circ2" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: block; background: var(--user-2); margin: 0 auto 8px;">
+                <input type="color" oninput="updateColor(2, this.value)" value="#a29bfe" style="opacity:0; width:100%; height:100%; cursor:pointer;">
+            </label>
+            <span style="font-size: 0.7rem; color: var(--text-mute); font-weight: 600;">#2</span>
+          </div>
+          <div class="color-node" style="text-align: center;">
+            <label class="circle-picker" id="circ3" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: block; background: var(--user-3); margin: 0 auto 8px;">
+                <input type="color" oninput="updateColor(3, this.value)" value="#ffffff" style="opacity:0; width:100%; height:100%; cursor:pointer;">
+            </label>
+            <span style="font-size: 0.7rem; color: var(--text-mute); font-weight: 600;">#3</span>
+          </div>
+        </div>
       </div>
-      <div class="note-body" id="noteText"></div>
+
+      <div class="preview-column">
+        <div class="phone-mockup">
+          <div class="phone-screen" id="screen"></div>
+        </div>
+      </div>
+
+      <div class="strategy-column">
+        <div id="strategyCard" class="strategy-card hidden">
+          <div class="note-header">
+            <span style="font-size:1.2rem;">💡</span>
+            <span class="note-title">Designer's Insight</span>
+          </div>
+          <div class="note-body" id="noteText"></div>
+        </div>
+      </div>
+
     </div>
 
     <div class="final-cta">
@@ -254,62 +319,137 @@
       document.getElementById(`circ${num}`).style.background = val;
     }
 
+    // 20 UNIQUE INDUSTRY MAPPINGS
     const INDUSTRY_DATA = {
-      "Bakery / Donut Shop": { layout: "L-01", cat: "Food" },
-      "Brewery / Distillery / Winery": { layout: "L-01", cat: "Food" },
-      "Coffee Shop / Café": { layout: "L-01", cat: "Food" },
-      "Food Truck": { layout: "L-01", cat: "Food" },
-      "Restaurant": { layout: "L-01", cat: "Food" },
-      "Art Gallery": { layout: "L-19", cat: "Art" },
-      "Boutique / Jewelry": { layout: "L-20", cat: "Retail" },
-      "Florist": { layout: "L-01", cat: "Retail" },
-      "Home Décor": { layout: "L-20", cat: "Retail" },
-      "Automotive": { layout: "L-21", cat: "Service" },
-      "Beauty / Salon / Spa": { layout: "L-01", cat: "Health" },
-      "Construction / Home": { layout: "L-21", cat: "Service" },
-      "Fitness / Gym / Yoga": { layout: "L-01", cat: "Health" },
-      "Law / Financial": { layout: "L-23", cat: "Service" },
-      "Real Estate": { layout: "L-24", cat: "Service" },
-      "Hotel / B&B": { layout: "L-01", cat: "Travel" },
-      "Tech Startup": { layout: "L-24", cat: "Tech" },
-      "SaaS": { layout: "L-24", cat: "Tech" },
-      "Photography": { layout: "L-19", cat: "Art" },
-      "Nonprofit": { layout: "L-23", cat: "Service" }
+      "Bakery / Donut Shop": { layout: "L-Bakery", cat: "Food" },
+      "Brewery / Distillery / Winery": { layout: "L-Brewery", cat: "Food" },
+      "Coffee Shop / Café": { layout: "L-Coffee", cat: "Food" },
+      "Food Truck": { layout: "L-FoodTruck", cat: "Food" },
+      "Restaurant": { layout: "L-Restaurant", cat: "Food" },
+      "Art Gallery": { layout: "L-ArtGallery", cat: "Art" },
+      "Boutique / Jewelry": { layout: "L-Boutique", cat: "Retail" },
+      "Florist": { layout: "L-Florist", cat: "Retail" },
+      "Home Décor": { layout: "L-HomeDecor", cat: "Retail" },
+      "Automotive": { layout: "L-Automotive", cat: "Service" },
+      "Beauty / Salon / Spa": { layout: "L-Salon", cat: "Health" },
+      "Construction / Home": { layout: "L-Construction", cat: "Service" },
+      "Fitness / Gym / Yoga": { layout: "L-Fitness", cat: "Health" },
+      "Law / Financial": { layout: "L-Law", cat: "Service" },
+      "Real Estate": { layout: "L-RealEstate", cat: "Service" },
+      "Hotel / B&B": { layout: "L-Hotel", cat: "Travel" },
+      "Tech Startup": { layout: "L-TechStartup", cat: "Tech" },
+      "SaaS": { layout: "L-SaaS", cat: "Tech" },
+      "Photography": { layout: "L-Photography", cat: "Art" },
+      "Nonprofit": { layout: "L-Nonprofit", cat: "Service" }
     };
 
     const LAYOUT_MAP = {
-      "L-01": ["header", "heroVisual:Welcome", "textBlock", "grid2", "footer"],
-      "L-19": ["header", "heroModern:Portfolio", "grid2", "textBlock", "footer"],
-      "L-20": ["header", "heroVisual:Shop", "grid2", "cta:Explore", "footer"],
-      "L-21": ["header", "heroModern:Trusted Service", "textBlock", "grid2", "footer"],
-      "L-23": ["header", "heroModern:Expert Advice", "textBlock", "grid2", "footer"],
-      "L-24": ["header", "heroModern:Find Your Fit", "grid2", "footer"],
+      "L-Bakery": ["headerCTA", "heroShop:Order Online", "products", "reviews", "footer"],
+      "L-Brewery": ["header", "heroEvent:Upcoming Events", "grid2", "textBlock", "footer"],
+      "L-Coffee": ["header", "heroModern:Our Story", "menuList", "grid2", "footer"],
+      "L-FoodTruck": ["headerCTA", "heroMap:Find Us Live", "menuList", "footer"],
+      "L-Restaurant": ["header", "heroMenu:Reserve Table", "menuList", "reviews", "footer"],
+      "L-ArtGallery": ["header", "heroArt:Current Exhibition", "portfolio", "textBlock", "footer"],
+      "L-Boutique": ["headerCTA", "heroShop:New Arrivals", "products", "grid2", "footer"],
+      "L-Florist": ["header", "heroVisual:Send Flowers", "grid2", "reviews", "footer"],
+      "L-HomeDecor": ["headerCTA", "heroModern:Shop Collections", "portfolio", "products", "footer"],
+      "L-Automotive": ["headerCTA", "heroQuote:Schedule Service", "trustBadges", "grid2", "footer"],
+      "L-Salon": ["headerCTA", "heroBook:Book Appointment", "menuList", "reviews", "footer"],
+      "L-Construction": ["headerCTA", "heroQuote:Get Estimate", "portfolio", "trustBadges", "footer"],
+      "L-Fitness": ["headerCTA", "heroBook:Join Now", "classSchedule", "grid2", "footer"],
+      "L-Law": ["header", "heroQuote:Free Consultation", "teamBlock", "textBlock", "footer"],
+      "L-RealEstate": ["headerCTA", "heroProperties:Search Homes", "grid2", "trustBadges", "footer"],
+      "L-Hotel": ["headerCTA", "heroBook:Check Availability", "grid2", "reviews", "footer"],
+      "L-TechStartup": ["header", "heroTech:Get Early Access", "textBlock", "trustBadges", "footer"],
+      "L-SaaS": ["header", "heroTech:Start Free Trial", "pricingTable", "reviews", "footer"],
+      "L-Photography": ["header", "heroArt:View Portfolio", "portfolio", "footer"],
+      "L-Nonprofit": ["headerCTA", "heroModern:Our Mission", "donateBlock", "textBlock", "footer"],
       "default": ["header", "heroModern", "textBlock", "footer"]
     };
 
+    // UX/UI FOCUSED RENDERERS
     const RENDERERS = {
       header: () => `<div class="w-item w-header"><div class="w-logo" style="background: var(--user-1)"></div><div style="width:12px;height:12px;background:#eee;border-radius:50%"></div></div>`,
+      headerCTA: () => `<div class="w-item w-header"><div class="w-logo" style="background: var(--user-1)"></div><div class="w-btn" style="background:var(--user-1); padding:4px 8px; font-size:0.5rem;">Action</div></div>`,
+      
+      heroMenu: (txt="View Menu") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); display:flex; flex-direction:column; justify-content:flex-end; padding:15px; height:180px;"><div style="display:flex;gap:10px;"><div class="w-btn" style="background: var(--user-1)">${txt}</div><div class="w-btn" style="background: #fff; color:#000">Location</div></div></div>`,
+      
+      heroShop: (txt="Shop Best Sellers") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); height:180px; display:flex; align-items:flex-end; padding:15px;"><div class="w-btn" style="background: var(--user-1); width:100%; text-align:center;">${txt}</div></div>`,
+      
+      heroQuote: (txt="Get a Free Quote") => `<div class="w-item w-hero modern" style="padding:40px 15px; text-align:center;"><div class="w-h1" style="width:80%"></div><div class="w-line" style="width:60%;margin:0 auto 15px;"></div><div class="w-btn" style="background: var(--user-1)">${txt}</div></div>`,
+      
+      heroBook: (txt="Book Appointment") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); height:200px; display:flex; align-items:center; justify-content:center;"><div style="background:#fff; padding:15px; border-radius:8px; width:80%; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.1);"><div class="w-h1" style="width:60%;margin-bottom:10px;"></div><div class="w-btn" style="background: var(--user-1); width:100%;">${txt}</div></div></div>`,
+      
+      heroTech: (txt="Start Free Trial") => `<div class="w-item w-hero modern" style="padding: 50px 15px; text-align:center;"><div class="w-h1" style="width:90%"></div><div class="w-line" style="width:70%;margin:0 auto 20px;"></div><div style="display:flex;gap:10px;justify-content:center"><div class="w-btn" style="background: var(--user-1)">${txt}</div><div class="w-btn" style="background: #eee; color:#333">Watch Demo</div></div></div>`,
+      
+      heroArt: (txt="View Portfolio") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); height: 220px; display: flex; align-items: center; justify-content: center; flex-direction:column; gap:15px;"><div class="w-h1" style="width:40%; background:#fff; height:20px;"></div><div class="w-btn" style="background: var(--user-1)">${txt}</div></div>`,
+      
+      heroVisual: (txt="Enter") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); height: 180px; display: flex; align-items: flex-end; padding:15px;"><div class="w-btn" style="background: var(--user-1)">${txt}</div></div>`,
+
       heroModern: (txt="View More") => `<div class="w-item w-hero modern"><div class="w-h1"></div><div class="w-line" style="width:50%;margin:0 auto 12px;"></div><div class="w-btn" style="background: var(--user-1)">${txt}</div></div>`,
-      heroVisual: (txt="Enter") => `<div class="w-item w-hero visual" style="background-color: var(--user-2)"><div class="w-btn accent" style="background: var(--user-1)">${txt}</div></div>`,
-      grid2: () => `<div class="w-item w-grid-2">${Array(4).fill('<div class="w-card"><div class="w-card-img"></div><div style="padding:15px"><div class="w-line" style="width:70%"></div></div></div>').join('')}</div>`,
-      textBlock: () => `<div class="w-item w-text-block"><div class="w-line"></div><div class="w-line"></div><div class="w-line" style="width:55%"></div></div>`,
-      cta: (txt) => `<div class="w-item" style="text-align:center;padding:20px;"><div class="w-btn accent" style="background: var(--user-1)">${txt}</div></div>`,
-      footer: () => `<div class="w-item w-footer"><div class="w-line" style="background:#444;width:30%"></div></div>`
+
+      heroMap: (txt="Find Us") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;"><div style="width:100%;height:100%;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.05) 0,rgba(0,0,0,0.05) 10px,transparent 10px,transparent 20px);"></div><div class="w-btn" style="position:absolute; background: var(--user-1); box-shadow:0 4px 10px rgba(0,0,0,0.2);">${txt}</div></div>`,
+
+      heroProperties: (txt="Search Homes") => `<div class="w-item w-hero visual" style="background-color: var(--user-2); height:200px; display:flex; align-items:center; justify-content:center;"><div style="background:#fff; padding:15px; border-radius:8px; width:85%;"><div style="font-size:0.7rem; color:#666; margin-bottom:5px;">Search by Zip or City</div><div style="display:flex; gap:5px;"><div style="flex-grow:1; height:24px; background:#f0f0f0; border-radius:4px;"></div><div class="w-btn" style="background:var(--user-1); padding:4px 10px; font-size:0.6rem;">Search</div></div></div></div>`,
+
+      heroEvent: (txt="Next Event") => `<div class="w-item w-hero modern" style="padding:40px 15px; text-align:center; background:var(--user-2); color:#fff;"><div style="font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">${txt}</div><div class="w-h1" style="width:80%;background:#fff;"></div><div class="w-btn" style="background: var(--user-1); margin-top:10px;">Get Tickets</div></div>`,
+      
+      trustBadges: () => `<div class="w-item" style="display:flex; justify-content:center; align-items:center; gap:15px; padding: 15px; background:#f5f5f5;"><div style="font-size:0.6rem; color:#888; font-weight:bold;">TRUSTED BY</div><div style="width:30px;height:12px;background:#ccc;border-radius:2px;"></div><div style="width:30px;height:12px;background:#ccc;border-radius:2px;"></div><div style="width:30px;height:12px;background:#ccc;border-radius:2px;"></div></div>`,
+      
+      menuList: () => `<div class="w-item" style="padding:20px 15px;"><div class="w-h1" style="width:40%;margin-left:0;margin-bottom:15px;"></div>${Array(3).fill('<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0;"><div style="width:65%;"><div class="w-line" style="width:100%;background:#333;margin-bottom:6px;"></div><div class="w-line" style="width:80%"></div></div><div style="font-weight:bold;font-size:0.8rem;color:var(--user-1);">$12</div></div>').join('')}</div>`,
+      
+      products: () => `<div class="w-item" style="padding:15px;"><div class="w-h1" style="width:50%;margin-left:0;margin-bottom:15px;height:12px;"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">${Array(2).fill('<div class="w-card"><div class="w-card-img" style="height:120px;"></div><div style="padding:10px"><div class="w-line" style="width:80%;background:#333;margin-bottom:8px;"></div><div class="w-line" style="width:50%;"></div><div class="w-btn" style="background:var(--user-1);width:100%;text-align:center;margin-top:10px;font-size:0.5rem;">Add to Cart</div></div></div>').join('')}</div></div>`,
+      
+      reviews: () => `<div class="w-item" style="padding:25px 15px; background:var(--user-2); color:#fff; text-align:center;"><div style="font-size:1.5rem;margin-bottom:10px;letter-spacing:2px;">★★★★★</div><div class="w-line" style="width:80%;margin:0 auto 8px;background:rgba(255,255,255,0.9);"></div><div class="w-line" style="width:60%;margin:0 auto 15px;background:rgba(255,255,255,0.9);"></div><div style="font-size:0.6rem; font-weight:bold;">- verified client</div></div>`,
+      
+      portfolio: () => `<div class="w-item" style="padding:5px;display:grid;grid-template-columns:1fr 1fr;gap:5px;">${Array(6).fill('<div style="background:var(--user-2);aspect-ratio:1/1;border-radius:2px;"></div>').join('')}</div>`,
+      
+      grid2: () => `<div class="w-item w-grid-2">${Array(4).fill('<div class="w-card"><div class="w-card-img"></div><div style="padding:15px"><div class="w-line" style="width:70%"></div><div class="w-line" style="width:40%"></div></div></div>').join('')}</div>`,
+      
+      textBlock: () => `<div class="w-item w-text-block" style="padding:20px 15px;"><div class="w-h1" style="width:40%;margin-left:0;margin-bottom:12px;"></div><div class="w-line"></div><div class="w-line"></div><div class="w-line" style="width:55%"></div></div>`,
+
+      donateBlock: () => `<div class="w-item" style="padding:25px 15px; background:#f9f9f9; text-align:center;"><div class="w-line" style="width:50%; margin:0 auto 15px; background:var(--user-1); height:4px;"></div><div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;"><div style="border:1px solid var(--user-1); color:var(--user-1); padding:5px 15px; border-radius:4px; font-size:0.8rem;">$25</div><div style="border:1px solid var(--user-1); color:var(--user-1); padding:5px 15px; border-radius:4px; font-size:0.8rem;">$50</div><div style="border:1px solid var(--user-1); color:var(--user-1); padding:5px 15px; border-radius:4px; font-size:0.8rem;">$100</div></div><div class="w-btn" style="background:var(--user-1); width:100%;">Donate Now</div></div>`,
+
+      pricingTable: () => `<div class="w-item" style="padding:20px 15px; display:flex; gap:10px;">${Array(2).fill('<div style="flex:1; border:1px solid #eee; border-radius:6px; padding:15px; text-align:center;"><div class="w-line" style="width:60%; margin:0 auto 10px;"></div><div style="font-size:1.2rem; font-weight:bold; color:var(--user-1); margin-bottom:10px;">$29</div><div class="w-line" style="width:80%; margin:0 auto 5px; height:4px;"></div><div class="w-line" style="width:80%; margin:0 auto 5px; height:4px;"></div><div class="w-btn" style="background:var(--user-1); width:100%; margin-top:10px; font-size:0.5rem;">Select Plan</div></div>').join('')}</div>`,
+
+      teamBlock: () => `<div class="w-item" style="padding:20px 15px;"><div class="w-h1" style="width:40%;margin-left:0;margin-bottom:15px;"></div><div style="display:flex; gap:15px; overflow-x:hidden;">${Array(3).fill('<div style="width:80px; text-align:center;"><div style="width:60px; height:60px; border-radius:50%; background:var(--user-2); margin:0 auto 8px;"></div><div class="w-line" style="width:80%; margin:0 auto;"></div></div>').join('')}</div></div>`,
+
+      classSchedule: () => `<div class="w-item" style="padding:20px 15px;"><div class="w-h1" style="width:50%;margin-left:0;margin-bottom:15px;"></div>${Array(3).fill('<div style="display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;"><div style="display:flex; gap:10px; align-items:center;"><div style="width:40px; height:40px; background:var(--user-2); border-radius:4px;"></div><div><div class="w-line" style="width:50px; background:#333; margin-bottom:4px;"></div><div style="font-size:0.6rem; color:#888;">9:00 AM</div></div></div><div class="w-btn" style="background:#f0f0f0; color:#333; font-size:0.5rem; padding:4px 8px;">Join</div></div>').join('')}</div>`,
+      
+      footer: () => `<div class="w-item w-footer" style="padding:30px 15px; background:#111; text-align:center;"><div class="w-line" style="background:#555;width:40%;margin:0 auto 15px;"></div><div style="display:flex;gap:15px;justify-content:center;"><div style="width:20px;height:20px;border-radius:50%;background:#444;"></div><div style="width:20px;height:20px;border-radius:50%;background:#444;"></div><div style="width:20px;height:20px;border-radius:50%;background:#444;"></div></div></div>`
     };
 
-    const getTip = (name, cat) => {
-      if(cat === "Food") return `For <b>${name}</b>, appetite appeal is everything. I prioritize high-quality visuals and make the Menu/Location accessible within one click.`;
-      if(cat === "Retail") return `For <b>${name}</b>, we reduce steps to checkout. I showcase 'Best Sellers' directly on the homepage to encourage browsing.`;
-      if(cat === "Service") return `Trust is the currency for <b>${name}</b>. I lead with a clear Value Proposition followed by Social Proof before asking for a quote.`;
-      if(cat === "Health") return `For <b>${name}</b>, we use a calming aesthetic and keep the 'Book Now' CTA prominent for frictionless scheduling.`;
-      if(cat === "Tech") return `Clarity wins. I use a minimal layout that explains the 'Solution' simply, validated immediately by trust badges.`;
-      if(cat === "Art") return `The work speaks for itself. I use a minimal framework that allows your portfolio images to dominate the screen.`;
-      return `For <b>${name}</b>, I recommend a balanced layout that establishes authority early with clear headlines and a direct call-to-action.`;
+    // 20 UNIQUE INDUSTRY DESIGN TIPS
+    const getTip = (name) => {
+      const tips = {
+        "Bakery / Donut Shop": `For a <b>${name}</b>, appetite appeal is everything. I integrate clean online ordering menus and place crave-worthy imagery directly above the fold.`,
+        "Brewery / Distillery / Winery": `For a <b>${name}</b>, it's about the vibe and the visits. I prioritize dynamic event calendars, age-gate UX, and clear location directions.`,
+        "Coffee Shop / Café": `For a <b>${name}</b>, regulars are your lifeblood. We emphasize fast mobile-menu scanning and seamless loyalty program integrations.`,
+        "Food Truck": `For a <b>${name}</b>, tracking is key. I implement live location tracking elements and high-contrast menus built specifically for reading outdoors in the sun.`,
+        "Restaurant": `For a <b>${name}</b>, we eliminate friction. I focus on direct reservation integrations (like OpenTable) and structured menus with clear dietary icon systems.`,
+        "Art Gallery": `For an <b>${name}</b>, the work speaks for itself. I use minimalist whitespace frameworks and high-res image lazy-loading to let the art dominate.`,
+        "Boutique / Jewelry": `For a <b>${name}</b>, we focus on reducing steps to checkout. I showcase 'Best Sellers' immediately and build prominent return policy trust signals.`,
+        "Florist": `For a <b>${name}</b>, timing is emotional. I build out delivery date pickers, occasion-based shopping categories, and strategic upsell pathways at checkout.`,
+        "Home Décor": `For <b>${name}</b>, context is everything. I use lookbook-style galleries that link directly to product pages, letting lifestyle imagery drive the sale.`,
+        "Automotive": `Trust is the currency for <b>${name}</b> websites. I lead with strong certification badges, social proof, and multi-step drop-off scheduling forms.`,
+        "Beauty / Salon / Spa": `For a <b>${name}</b>, we use a calming aesthetic. I link visual portfolios directly to specific stylists and integrate frictionless booking software.`,
+        "Construction / Home": `For a <b>${name}</b>, seeing is believing. I prioritize interactive Before/After sliders, project case studies, and highly visible licensing badges.`,
+        "Fitness / Gym / Yoga": `For a <b>${name}</b>, momentum matters. I build dynamic class schedules and prominent, gated trial-offer forms to capture high-intent leads.`,
+        "Law / Financial": `For <b>${name}</b>, authority is critical. I use distinct practice-area silos, authoritative typography, and highly secure, confidential contact forms.`,
+        "Real Estate": `For <b>${name}</b>, the search is the product. I structure robust map-based search UX and ensure agent profiles have high visibility on every listing.`,
+        "Hotel / B&B": `For a <b>${name}</b>, the goal is direct bookings. I pair immersive room galleries with subtle scarcity UX (like 'rooms left') to incentivize immediate action.`,
+        "Tech Startup": `Clarity wins for a <b>${name}</b>. I use a minimal layout that explains the solution simply, validated immediately by email capture forms and trust badges.`,
+        "SaaS": `For a <b>${name}</b>, pricing clarity drives conversions. I build interactive pricing toggles, feature comparison matrices, and clear onboarding CTAs.`,
+        "Photography": `For a <b>${name}</b>, image delivery must be flawless. I use responsive masonry grids and build private client portal logins for proofing.`,
+        "Nonprofit": `For a <b>${name}</b>, emotional storytelling needs an action. I structure frictionless multi-tier donation widgets directly alongside impact transparency metrics.`
+      };
+      
+      return tips[name] || `For <b>${name}</b>, I recommend a balanced layout that establishes authority early with clear headlines and a direct call-to-action.`;
     };
 
     function selectIndustry(name) {
       document.querySelectorAll('.tag').forEach(t => t.classList.toggle('active', t.innerText === name));
-      const data = INDUSTRY_DATA[name] || { layout: "default", cat: "" };
+      const data = INDUSTRY_DATA[name] || { layout: "default" };
       const structure = LAYOUT_MAP[data.layout] || LAYOUT_MAP["default"];
       screen.innerHTML = '';
       structure.forEach(blockStr => {
@@ -319,7 +459,7 @@
       const card = document.getElementById('strategyCard');
       const noteText = document.getElementById('noteText');
       card.classList.remove('hidden');
-      noteText.innerHTML = getTip(name, data.cat);
+      noteText.innerHTML = getTip(name);
     }
 
     function filterIndustries(val) {
