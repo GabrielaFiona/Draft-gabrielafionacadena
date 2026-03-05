@@ -733,3 +733,40 @@ h2 {
 .stat-card .center-cta {
   margin-top: 1.5rem;
 }
+
+
+/* ========================================= */
+/* DESKTOP ALIGNMENT FIX FOR PRICING PACKAGES */
+/* ========================================= */
+@media (min-width: 1024px) {
+  .pricing-grid {
+    /* Forces exactly 3 columns on desktop to prevent awkward wrapping */
+    grid-template-columns: repeat(3, 1fr);
+    /* Centers the grid horizontally */
+    justify-content: center;
+    align-items: stretch;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    /* Keeps the cards from getting unnecessarily wide */
+    max-width: 360px;
+    margin: 0 auto; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .package-text-wrapper {
+    /* Allows the white inner box to fill the space evenly across all 3 cards */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pill-container {
+    /* Pushes the button perfectly to the bottom of the card, keeping them aligned */
+    margin-top: auto !important;
+  }
+}
