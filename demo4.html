@@ -7,16 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/c7ff6c3a3db4be6c7db6e33f9279c137e6772946/assets/img/glogofaviconblue.png">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gabriela's Design Lab v5.2</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GabrielaFiona/Draft-gabrielafionacadena/c7ff6c3a3db4be6c7db6e33f9279c137e6772946/assets/img/glogofaviconblue.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 
@@ -41,8 +32,54 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-body); padding: 40px 20px; line-height: 1.6; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); padding: 100px 20px 40px; line-height: 1.6; }
     .container { max-width: 550px; margin: 0 auto; }
+
+    /* DARK THEME NAV BAR */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-bar .logo { 
+      font-weight: 700; 
+      font-size: 1.5rem; 
+      letter-spacing: -0.03em; 
+      font-family: 'Space Grotesk', sans-serif; 
+      color: #fff; 
+    }
+    .nav-bar .logo .highlight { color: #4E7BFE; font-weight: 400; }
+    .nav-bar .btn-sm {
+      padding: 0.6rem 1.2rem;
+      background: #4E7BFE;
+      color: white;
+      border-radius: 99px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .nav-bar .btn-sm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(76, 125, 255, 0.3);
+    }
+
+    /* MOBILE NAV BAR FIX */
+    @media (max-width: 600px) {
+      .nav-bar { padding: 0.8rem 1rem; }
+      .nav-bar .logo { font-size: 1.1rem; }
+      .nav-bar .btn-sm { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+    }
 
     header { text-align: center; margin-bottom: 30px; }
     h1 { font-family: var(--font-head); font-style: italic; font-size: 2.5rem; }
@@ -131,8 +168,7 @@
     }
   </style>
 </head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6TXJCBTRSX"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6TXJCBTRSX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -142,13 +178,12 @@
 </script>
 <body>
 
+  <nav class="nav-bar smart-nav">
+    <div class="logo">Gabriela <span class="highlight">Digital.Architect</span></div>
+    <a href="index.html#name" class="btn-sm open-form-link">Start a Project</a>
+  </nav>
+
   <div class="container">
-    <body>
-    <nav class="nav-bar smart-nav">
-      <div class="logo">Gabriela <span class="highlight">Digital.Architect</span></div>
-      <a href="index.html#name" class="btn-sm open-form-link">Start a Project</a>
-    </nav>
-        <div class="container">
     
     <header>
       <h1>Website Layout Guide</h1>
