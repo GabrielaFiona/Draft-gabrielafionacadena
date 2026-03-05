@@ -1474,3 +1474,24 @@ h2 { line-height: 1.1; letter-spacing: -0.03em; }
     padding-top: 1rem;
   }
 }
+
+/* ---------------------------------------------------- */
+/* ABOUT SECTION BUTTON EQUALIZING                      */
+/* ---------------------------------------------------- */
+.about-actions {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1rem;
+}
+
+.about-actions .btn-primary,
+.about-actions .btn-secondary {
+  flex: 1; 
+  min-width: 220px; 
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* Prevents default margins from misaligning them */
+  box-sizing: border-box;
+}
