@@ -770,3 +770,25 @@ h2 { line-height: 1.1; letter-spacing: -0.03em; }
   -webkit-appearance: none;
   appearance: none;
 }
+
+/* Desktop: Side-by-side */
+.hero-actions {
+  display: flex;
+  gap: 1rem; /* Adds nice breathing room between the buttons */
+  margin-top: 1.5rem; /* Keeps them separated from the paragraph above */
+  flex-wrap: wrap; /* Safety fallback */
+}
+
+/* Mobile: Stacked nicely for touch UX */
+@media (max-width: 768px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero-actions .btn-primary {
+    width: 100%; /* Makes the buttons full-width for easier thumb tapping */
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+  }
+}
